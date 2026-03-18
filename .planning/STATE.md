@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-03-18T17:56:44Z"
-last_activity: 2026-03-18 -- Completed 02-02 (build pipeline + content collections), Phase 2 complete
+stopped_at: Completed 02-03-PLAN.md
+last_updated: "2026-03-18T18:30:00Z"
+last_activity: 2026-03-18 -- Completed 02-03 (gap closure: headerMap fix + derived stats)
 progress:
   total_phases: 8
   completed_phases: 2
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 4
+  completed_plans: 4
   percent: 25
 ---
 
@@ -21,32 +21,32 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-17)
 
 **Core value:** When someone Googles "who owns [dispensary name]," this site is the answer -- a transparent, searchable directory that lets Massachusetts cannabis consumers shop by their values.
-**Current focus:** Phase 2 complete, ready for Phase 3
+**Current focus:** Phase 2 complete (including gap closure), ready for Phase 3
 
 ## Current Position
 
 Phase: 2 of 8 (Data Pipeline) -- COMPLETE
-Plan: 2 of 2 complete in current phase
+Plan: 3 of 3 complete in current phase
 Status: Phase 2 complete -- ready for Phase 3
-Last activity: 2026-03-18 -- Completed 02-02 (build pipeline + content collections)
+Last activity: 2026-03-18 -- Completed 02-03 (gap closure: headerMap fix + derived stats)
 
 Progress: [██░░░░░░░░] 25%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 3.5min
-- Total execution time: 0.12 hours
+- Total plans completed: 3
+- Average duration: 3.3min
+- Total execution time: 0.17 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 02-data-pipeline | 2 | 7min | 3.5min |
+| 02-data-pipeline | 3 | 10min | 3.3min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (4min), 02-02 (3min)
+- Last 5 plans: 02-01 (4min), 02-02 (3min), 02-03 (3min)
 - Trend: consistent
 
 *Updated after each plan completion*
@@ -70,6 +70,10 @@ Recent decisions affecting current work:
 - [02-02]: Dispensary JSON entries include 'id' field (licenseNumber) for Astro file() loader
 - [02-02]: Content Collections schema defined inline in content.config.ts using astro/zod
 - [02-02]: Unblocked scripts/ directory in .gitignore for build tooling
+- [02-03]: Map 'Legal Entity (MCC)' XLSX column to parentCompany schema field
+- [02-03]: Map 'Type' XLSX column to licenseType (actual header, not 'License Type')
+- [02-03]: Compute totalTowns and percentIndependent in build-data.ts from records, not Summary sheet
+- [02-03]: percentIndependent defaults to 0 with warning since Independent column not in XLSX
 
 ### Pending Todos
 
@@ -83,6 +87,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T17:56:44Z
-Stopped at: Completed 02-02-PLAN.md
+Last session: 2026-03-18T18:30:00Z
+Stopped at: Completed 02-03-PLAN.md
 Resume file: Phase 3 planning
