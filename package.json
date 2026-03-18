@@ -9,6 +9,9 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.18.1",
