@@ -21,8 +21,8 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Detail Pages
 
 - [x] **DETL-01**: Each of 525 dispensaries has its own pre-rendered page with a unique, SEO-friendly URL
-- [ ] **DETL-02**: Detail page shows dispensary name, owner/parent company, address, phone number (tap-to-call on mobile), and license type
-- [ ] **DETL-03**: Detail page displays ownership characteristic badges (Women-Owned, Black-Owned, etc.)
+- [x] **DETL-02**: Detail page shows dispensary name, owner/parent company, address, phone number (tap-to-call on mobile), and license type
+- [x] **DETL-03**: Detail page displays ownership characteristic badges (Women-Owned, Black-Owned, etc.)
 - [x] **DETL-04**: Detail page includes a 2-3 sentence ownership narrative unique to that listing
 - [x] **DETL-05**: Detail page links to other locations owned by the same owner/parent company
 - [x] **DETL-06**: Detail page includes schema.org structured data (JSON-LD) for rich Google search results
@@ -94,8 +94,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SRCH-07 | Phase 6: Filter System | Pending |
 | SRCH-08 | Phase 4: Homepage and Card Layout | Pending |
 | DETL-01 | Phase 3: Detail Pages | Complete |
-| DETL-02 | Phase 3: Detail Pages | Pending |
-| DETL-03 | Phase 3: Detail Pages | Pending |
+| DETL-02 | Phase 3: Detail Pages | Complete |
+| DETL-03 | Phase 3: Detail Pages | Complete |
 | DETL-04 | Phase 3: Detail Pages | Complete |
 | DETL-05 | Phase 3: Detail Pages | Complete |
 | DETL-06 | Phase 3: Detail Pages | Complete |
