@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Phase 3 context gathered
-last_updated: "2026-03-18T19:23:33.072Z"
-last_activity: "2026-03-18 -- Completed 02-03 (gap closure: headerMap fix + derived stats)"
+status: in-progress
+stopped_at: Completed 03-01-PLAN.md
+last_updated: "2026-03-18T21:04:18Z"
+last_activity: "2026-03-18 -- Completed 03-01 (lib functions: slugs, narrative, jsonld, siblings, seo-meta)"
 progress:
   total_phases: 8
   completed_phases: 2
-  total_plans: 4
-  completed_plans: 4
-  percent: 25
+  total_plans: 7
+  completed_plans: 5
+  percent: 71
 ---
 
 # Project State
@@ -21,32 +21,33 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-17)
 
 **Core value:** When someone Googles "who owns [dispensary name]," this site is the answer -- a transparent, searchable directory that lets Massachusetts cannabis consumers shop by their values.
-**Current focus:** Phase 2 complete (including gap closure), ready for Phase 3
+**Current focus:** Phase 3 in progress -- lib functions complete, template and visual verification remaining
 
 ## Current Position
 
-Phase: 2 of 8 (Data Pipeline) -- COMPLETE
-Plan: 3 of 3 complete in current phase
-Status: Phase 2 complete -- ready for Phase 3
-Last activity: 2026-03-18 -- Completed 02-03 (gap closure: headerMap fix + derived stats)
+Phase: 3 of 8 (Detail Pages) -- IN PROGRESS
+Plan: 1 of 3 complete in current phase
+Status: Plan 03-01 complete -- lib functions built and tested
+Last activity: 2026-03-18 -- Completed 03-01 (lib functions: slugs, narrative, jsonld, siblings, seo-meta)
 
-Progress: [██░░░░░░░░] 25%
+Progress: [███████░░░] 71%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 3.3min
-- Total execution time: 0.17 hours
+- Total plans completed: 4
+- Average duration: 3.8min
+- Total execution time: 0.25 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 02-data-pipeline | 3 | 10min | 3.3min |
+| 03-detail-pages | 1 | 5min | 5min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (4min), 02-02 (3min), 02-03 (3min)
+- Last 5 plans: 02-01 (4min), 02-02 (3min), 02-03 (3min), 03-01 (5min)
 - Trend: consistent
 
 *Updated after each plan completion*
@@ -74,6 +75,9 @@ Recent decisions affecting current work:
 - [02-03]: Map 'Type' XLSX column to licenseType (actual header, not 'License Type')
 - [02-03]: Compute totalTowns and percentIndependent in build-data.ts from records, not Summary sheet
 - [02-03]: percentIndependent defaults to 0 with warning since Independent column not in XLSX
+- [03-01]: Second-pass numeric suffix for same-name-same-town slug collisions (17 multi-license groups)
+- [03-01]: Narrative composeProse strips parenthetical roles from owner field for cleaner prose
+- [03-01]: JSON-LD uses Store type (schema.org subtype of LocalBusiness) per research recommendation
 
 ### Pending Todos
 
@@ -81,12 +85,12 @@ None yet.
 
 ### Blockers/Concerns
 
-- [Research]: Ownership narrative content strategy needed before Phase 3 -- 525 unique narratives required to avoid thin content penalties
+- [RESOLVED in 03-01]: Ownership narrative content strategy -- hybrid approach with three-state generation implemented
 - [Research]: Owner group page normalization rules needed in Phase 2 -- same person operating under multiple LLCs
 - [Research]: Correction form tooling (Formspree, Google Forms, etc.) needs evaluation before Phase 7
 
 ## Session Continuity
 
-Last session: 2026-03-18T19:23:33.069Z
-Stopped at: Phase 3 context gathered
-Resume file: .planning/phases/03-detail-pages/03-CONTEXT.md
+Last session: 2026-03-18T21:04:18Z
+Stopped at: Completed 03-01-PLAN.md
+Resume file: .planning/phases/03-detail-pages/03-01-SUMMARY.md
