@@ -17,6 +17,10 @@ dist/
 # Allow test fixture XLSX (small, generated)
 !tests/fixtures/*.xlsx
 
+# Generated data (rebuilt from XLSX at build time)
+src/data/*.json
+data/reports/
+
 # OS
 .DS_Store
 Thumbs.db
@@ -29,7 +33,8 @@ Thumbs.db
 *.docx
 *.csv
 SOPs/
-scripts/
+scripts/*.html
+scripts/*.docx
 BRAND_INDEPENDENCE_INDEX.md
 CALIBRATION_REPORT.md
 DECISIONS_LOG.md
