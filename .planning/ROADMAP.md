@@ -48,7 +48,7 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Zod schema, XLSX parser, test infrastructure (Wave 1)
+- [x] 02-01-PLAN.md — Zod schema, XLSX parser, test infrastructure (Wave 1) (completed 2026-03-18)
 - [ ] 02-02-PLAN.md — Build pipeline script, Content Collections, reports (Wave 2)
 
 ### Phase 3: Detail Pages
@@ -154,7 +154,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Project Scaffold and Deploy Pipeline | 1/1 | Complete    | 2026-03-18 |
-| 2. Data Pipeline | 0/2 | Not started | - |
+| 2. Data Pipeline | 1/2 | In progress | - |
 | 3. Detail Pages | 0/TBD | Not started | - |
 | 4. Homepage and Card Layout | 0/TBD | Not started | - |
 | 5. Search System | 0/TBD | Not started | - |

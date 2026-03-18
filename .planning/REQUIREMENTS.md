@@ -30,8 +30,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Data Pipeline
 
-- [ ] **DATA-01**: Spreadsheet (CSV) is transformed into structured JSON data at build time with schema validation
-- [ ] **DATA-02**: Build fails if data has missing required fields or invalid values (no silent failures)
+- [x] **DATA-01**: Spreadsheet (CSV) is transformed into structured JSON data at build time with schema validation
+- [x] **DATA-02**: Build fails if data has missing required fields or invalid values (no silent failures)
 - [ ] **DATA-03**: Search index is pre-built at build time and served as static JSON
 - [ ] **DATA-04**: Monthly update workflow is documented: update CSV, push to git, site auto-rebuilds
 
@@ -100,8 +100,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DETL-05 | Phase 3: Detail Pages | Pending |
 | DETL-06 | Phase 3: Detail Pages | Pending |
 | DETL-07 | Phase 3: Detail Pages | Pending |
-| DATA-01 | Phase 2: Data Pipeline | Pending |
-| DATA-02 | Phase 2: Data Pipeline | Pending |
+| DATA-01 | Phase 2: Data Pipeline | Complete |
+| DATA-02 | Phase 2: Data Pipeline | Complete |
 | DATA-03 | Phase 5: Search System | Pending |
 | DATA-04 | Phase 8: Data Freshness and Launch Readiness | Pending |
 | TRST-01 | Phase 7: Trust and Legal | Pending |
