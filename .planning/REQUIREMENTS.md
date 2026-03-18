@@ -44,9 +44,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Design & Performance
 
-- [ ] **DSGN-01**: Site is fully responsive — card grid adapts from mobile to desktop
+- [x] **DSGN-01**: Site is fully responsive — card grid adapts from mobile to desktop
 - [ ] **DSGN-02**: Homepage loads in under 2 seconds on a 3G mobile connection
-- [ ] **DSGN-03**: Homepage features a prominent search bar with "Who Owns Your Dispensary?" headline and key stats (525 Active Licenses, 92% Independently Owned, 157 Towns)
+- [x] **DSGN-03**: Homepage features a prominent search bar with "Who Owns Your Dispensary?" headline and key stats (525 Active Licenses, 92% Independently Owned, 157 Towns)
 - [ ] **DSGN-04**: Site deploys to Cloudflare Pages from a git push with zero manual deploy steps
 
 ## v2 Requirements
