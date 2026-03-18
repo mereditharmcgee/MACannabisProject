@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Phase 4 context gathered
-last_updated: "2026-03-18T21:53:04.691Z"
-last_activity: 2026-03-18 -- Completed 03-03 (visual verification checkpoint approved, Phase 3 complete)
+status: executing
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-03-18T22:43:00Z"
+last_activity: 2026-03-18 -- Completed 04-01 (DispensaryGridCard component and format helpers)
 progress:
   total_phases: 8
   completed_phases: 3
-  total_plans: 7
-  completed_plans: 7
-  percent: 100
+  total_plans: 9
+  completed_plans: 8
+  percent: 89
 ---
 
 # Project State
@@ -21,23 +21,23 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-17)
 
 **Core value:** When someone Googles "who owns [dispensary name]," this site is the answer -- a transparent, searchable directory that lets Massachusetts cannabis consumers shop by their values.
-**Current focus:** Phase 3 complete -- ready for Phase 4 (Homepage and Card Layout)
+**Current focus:** Phase 4 in progress -- Homepage and Card Layout
 
 ## Current Position
 
-Phase: 3 of 8 (Detail Pages) -- COMPLETE
-Plan: 3 of 3 complete in current phase
-Status: Phase 3 complete -- all 525 detail pages built, verified, and user-approved
-Last activity: 2026-03-18 -- Completed 03-03 (visual verification checkpoint approved, Phase 3 complete)
+Phase: 4 of 8 (Homepage and Card Layout)
+Plan: 1 of 2 complete in current phase
+Status: 04-01 complete -- DispensaryGridCard and format helpers built with TDD
+Last activity: 2026-03-18 -- Completed 04-01 (DispensaryGridCard component and format helpers)
 
-Progress: [██████████] 100%
+Progress: [█████████░] 89%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
-- Average duration: 3.2min
-- Total execution time: 0.37 hours
+- Total plans completed: 8
+- Average duration: 3min
+- Total execution time: 0.40 hours
 
 **By Phase:**
 
@@ -45,9 +45,10 @@ Progress: [██████████] 100%
 |-------|-------|-------|----------|
 | 02-data-pipeline | 3 | 10min | 3.3min |
 | 03-detail-pages | 3 | 9min | 3min |
+| 04-homepage-and-card-layout | 1 | 2min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 02-03 (3min), 03-01 (5min), 03-02 (3min), 03-03 (1min)
+- Last 5 plans: 03-01 (5min), 03-02 (3min), 03-03 (1min), 04-01 (2min)
 - Trend: consistent
 
 *Updated after each plan completion*
@@ -81,6 +82,8 @@ Recent decisions affecting current work:
 - [Phase 03]: trailingSlash: always ensures consistent /dispensary/[slug]/ URL format
 - [Phase 03]: DispensaryCard uses three-state rendering: full, pending, inconclusive for privacy-safe display
 - [03-03]: User approved detail page design as matching "polished restaurant guide" intent
+- [04-01]: Inc. stays title-case not uppercased -- only LLC/LLP get full uppercase treatment
+- [04-01]: Owner parenthetical roles stripped via regex for cleaner card display
 
 ### Pending Todos
 
@@ -94,6 +97,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T21:53:04.689Z
-Stopped at: Phase 4 context gathered
-Resume file: .planning/phases/04-homepage-and-card-layout/04-CONTEXT.md
+Last session: 2026-03-18T22:43:00Z
+Stopped at: Completed 04-01-PLAN.md
+Resume file: .planning/phases/04-homepage-and-card-layout/04-01-SUMMARY.md

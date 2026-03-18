@@ -16,7 +16,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **SRCH-05**: User can combine multiple filter pills (e.g., Women-Owned + Independent) to narrow results
 - [ ] **SRCH-06**: User can toggle between Independent and MSO Corporate dispensaries
 - [ ] **SRCH-07**: User can filter dispensaries by county using a dropdown
-- [ ] **SRCH-08**: Search results display as cards showing dispensary name, town, owner, and ownership badge tags
+- [x] **SRCH-08**: Search results display as cards showing dispensary name, town, owner, and ownership badge tags
 
 ### Detail Pages
 
@@ -92,7 +92,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SRCH-05 | Phase 6: Filter System | Pending |
 | SRCH-06 | Phase 6: Filter System | Pending |
 | SRCH-07 | Phase 6: Filter System | Pending |
-| SRCH-08 | Phase 4: Homepage and Card Layout | Pending |
+| SRCH-08 | Phase 4: Homepage and Card Layout | Complete |
 | DETL-01 | Phase 3: Detail Pages | Complete |
 | DETL-02 | Phase 3: Detail Pages | Complete |
 | DETL-03 | Phase 3: Detail Pages | Complete |
