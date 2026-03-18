@@ -74,7 +74,7 @@ Plans:
 **Depends on**: Phase 3
 **Requirements**: DSGN-01, DSGN-03, SRCH-08
 **Success Criteria** (what must be TRUE):
-  1. The homepage displays a prominent "Who Owns Your Dispensary?" headline with key stats (525 Active Licenses, 92% Independently Owned, 157 Towns)
+  1. The homepage displays a prominent "Who Owns Your Dispensary?" headline with key stats (525 Active Licenses, 92% Independently Owned, 156 Towns)
   2. Dispensaries appear as cards showing dispensary name, town, owner, and ownership badge tags
   3. The card grid adapts from a single-column layout on mobile to a multi-column grid on desktop without horizontal scrolling
   4. Clicking a card navigates to that dispensary's detail page

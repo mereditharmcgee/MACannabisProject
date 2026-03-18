@@ -46,7 +46,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **DSGN-01**: Site is fully responsive — card grid adapts from mobile to desktop
 - [ ] **DSGN-02**: Homepage loads in under 2 seconds on a 3G mobile connection
-- [x] **DSGN-03**: Homepage features a prominent search bar with "Who Owns Your Dispensary?" headline and key stats (525 Active Licenses, 92% Independently Owned, 157 Towns)
+- [ ] **DSGN-03**: Homepage features a prominent search bar with "Who Owns Your Dispensary?" headline and key stats (525 Active Licenses, 92% Independently Owned, 156 Towns)
 - [ ] **DSGN-04**: Site deploys to Cloudflare Pages from a git push with zero manual deploy steps
 
 ## v2 Requirements
@@ -110,7 +110,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TRST-04 | Phase 7: Trust and Legal | Pending |
 | DSGN-01 | Phase 4: Homepage and Card Layout | Pending |
 | DSGN-02 | Phase 8: Data Freshness and Launch Readiness | Pending |
-| DSGN-03 | Phase 4: Homepage and Card Layout | Pending |
+| DSGN-03 | Phase 4 (headline + stats) + Phase 5 (search bar) | Partial — headline and stats done in Phase 4, search bar deferred to Phase 5 |
 | DSGN-04 | Phase 1: Project Scaffold and Deploy Pipeline | Pending |
 
 **Coverage:**
