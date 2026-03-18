@@ -45,11 +45,11 @@ Plans:
   2. Removing a required field from a CSV row causes the build to fail with a clear error message identifying the problem row and field
   3. All 525 records pass schema validation including dispensary name, owner, town, address, license type, and ownership tags
   4. Owner/parent company names are normalized so the same entity is not represented multiple ways
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 02-01: TBD
-- [ ] 02-02: TBD
+- [ ] 02-01-PLAN.md — Zod schema, XLSX parser, test infrastructure (Wave 1)
+- [ ] 02-02-PLAN.md — Build pipeline script, Content Collections, reports (Wave 2)
 
 ### Phase 3: Detail Pages
 **Goal**: Every dispensary has its own pre-rendered page that Google can index, with ownership information, structured data, and cross-links to sibling locations
@@ -154,7 +154,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Project Scaffold and Deploy Pipeline | 1/1 | Complete    | 2026-03-18 |
-| 2. Data Pipeline | 0/TBD | Not started | - |
+| 2. Data Pipeline | 0/2 | Not started | - |
 | 3. Detail Pages | 0/TBD | Not started | - |
 | 4. Homepage and Card Layout | 0/TBD | Not started | - |
 | 5. Search System | 0/TBD | Not started | - |
