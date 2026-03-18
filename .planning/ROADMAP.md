@@ -31,11 +31,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Running `git push` to main triggers an automatic build and deploy on Cloudflare Pages
   2. The deployed site loads a placeholder page at the production URL on meredithmcgee.org
   3. Tailwind CSS utility classes render correctly on the deployed site
-**Plans**: TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [ ] 01-01-PLAN.md — Scaffold Astro 5 + Tailwind CSS v4, push to GitHub, connect Cloudflare Pages deploy pipeline
 
 ### Phase 2: Data Pipeline
 **Goal**: The 525-record spreadsheet transforms into validated, structured JSON at build time, and the build fails loudly on invalid data
@@ -154,7 +153,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Project Scaffold and Deploy Pipeline | 0/TBD | Not started | - |
+| 1. Project Scaffold and Deploy Pipeline | 0/1 | Planning complete | - |
 | 2. Data Pipeline | 0/TBD | Not started | - |
 | 3. Detail Pages | 0/TBD | Not started | - |
 | 4. Homepage and Card Layout | 0/TBD | Not started | - |
