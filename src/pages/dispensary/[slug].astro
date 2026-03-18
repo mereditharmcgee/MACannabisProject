@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DispensaryCard from '../../components/DispensaryCard.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { generateNarrative } from '../../lib/narrative';
+import { buildJsonLd } from '../../lib/jsonld';
+import { groupByParentCompany, getSiblings } from '../../lib/siblings';
+import { buildMetaTitle, buildMetaDescription } from '../../lib/seo-meta';
+
+export async function getStaticPaths() {
+  const dispensaries = await getCollection('dispensaries');
+  const allData = dispensaries.map((e) => e.data);
+  const siblingMap = groupByParentCompany(allData);
+
+  return dispensaries.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: {
+      dispensary: entry.data,
+      siblings: getSiblings(entry.data.slug!, allData, siblingMap),
+    },
+  }));
+}
+
+const { dispensary, siblings } = Astro.props;
+const narrative = generateNarrative(dispensary);
+const jsonLd = buildJsonLd(dispensary, Astro.site?.toString().replace(/\/$/, '') ?? '');
+const title = buildMetaTitle(dispensary.tradeName);
+const description = buildMetaDescription(dispensary);
+---
+
+<BaseLayout title={title} description={description}>
+  <JsonLd jsonLd={jsonLd} />
+  <main class="py-8 px-4">
+    <DispensaryCard dispensary={dispensary} narrative={narrative} siblings={siblings} />
+  </main>
+</BaseLayout>
