@@ -78,11 +78,11 @@ Plans:
   2. Dispensaries appear as cards showing dispensary name, town, owner, and ownership badge tags
   3. The card grid adapts from a single-column layout on mobile to a multi-column grid on desktop without horizontal scrolling
   4. Clicking a card navigates to that dispensary's detail page
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 04-01: TBD
-- [ ] 04-02: TBD
+- [ ] 04-01-PLAN.md — DispensaryGridCard component with format helpers and TDD tests (Wave 1)
+- [ ] 04-02-PLAN.md — Homepage assembly with hero, stats, card grid, footer, and visual checkpoint (Wave 2)
 
 ### Phase 5: Search System
 **Goal**: Users can find any dispensary instantly by typing a name, town, or owner into the search bar without waiting for a server response
@@ -157,7 +157,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 1. Project Scaffold and Deploy Pipeline | 1/1 | Complete    | 2026-03-18 |
 | 2. Data Pipeline | 3/3 | Complete    | 2026-03-18 |
 | 3. Detail Pages | 3/3 | Complete    | 2026-03-18 |
-| 4. Homepage and Card Layout | 0/TBD | Not started | - |
+| 4. Homepage and Card Layout | 0/2 | Not started | - |
 | 5. Search System | 0/TBD | Not started | - |
 | 6. Filter System | 0/TBD | Not started | - |
 | 7. Trust and Legal | 0/TBD | Not started | - |
