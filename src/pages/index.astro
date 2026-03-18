@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <main class="flex flex-col items-center justify-center min-h-screen px-4 py-16">
+    <div class="max-w-2xl mx-auto text-center">
+      <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+        Who Owns Your Dispensary?
+      </h1>
+      <p class="mt-4 text-lg text-gray-600">
+        MA Cannabis Directory &mdash; Coming Soon
+      </p>
+
+      <div class="grid grid-cols-1 gap-6 mt-12 sm:grid-cols-3">
+        <div class="p-6 bg-white rounded-lg shadow-sm">
+          <p class="text-3xl font-bold text-green-700">525</p>
+          <p class="mt-1 text-sm text-gray-500">Active Licenses</p>
+        </div>
+        <div class="p-6 bg-white rounded-lg shadow-sm">
+          <p class="text-3xl font-bold text-green-700">92%</p>
+          <p class="mt-1 text-sm text-gray-500">Independently Owned</p>
+        </div>
+        <div class="p-6 bg-white rounded-lg shadow-sm">
+          <p class="text-3xl font-bold text-green-700">157</p>
+          <p class="mt-1 text-sm text-gray-500">Towns</p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="mt-16">
+      <p class="text-xs text-gray-400">A project by Meredith McGee</p>
+    </footer>
+  </main>
+</BaseLayout>

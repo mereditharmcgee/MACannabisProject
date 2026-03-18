@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Environment
+.env
+.env.*
+
+# Data files (large, not for git)
+*.xlsx
+*.xls
+.~lock.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+
+# Legacy project files (pre-Astro)
+*.html
+*.docx
+*.csv
+SOPs/
+scripts/
+BRAND_INDEPENDENCE_INDEX.md
+CALIBRATION_REPORT.md
+DECISIONS_LOG.md
+DISPENSARY_PROJECT_HANDOFF.md
+MA_Dispensary_Directory_Launch_Plan.md
+METHODOLOGY.md
+NEXT_SESSION_PROMPT.md
+PRD_MA_Cannabis_Directory.md
+PROJECT_BRIEF.md
+RESEARCH_LOG.md
+SESSION_HANDOFF.md
+SOP_INDEX.md

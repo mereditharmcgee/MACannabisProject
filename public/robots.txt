@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dispensaries.meredithmcgee.org/sitemap-index.xml
