@@ -13,7 +13,7 @@ This roadmap delivers a search-first, SEO-optimized static directory that answer
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Project Scaffold and Deploy Pipeline** - Astro project with Tailwind CSS, Cloudflare Pages deployment from git push (completed 2026-03-18)
-- [x] **Phase 2: Data Pipeline** - CSV-to-JSON transformation with Zod schema validation that fails the build on bad data (completed 2026-03-18)
+- [ ] **Phase 2: Data Pipeline** - CSV-to-JSON transformation with Zod schema validation that fails the build on bad data (gap closure in progress)
 - [ ] **Phase 3: Detail Pages** - 525 pre-rendered dispensary pages with SEO-friendly URLs, structured data, and ownership narratives
 - [ ] **Phase 4: Homepage and Card Layout** - Responsive homepage with hero section, stats banner, and browsable card grid
 - [ ] **Phase 5: Search System** - Instant typeahead search across dispensary names, towns, and owners with pre-built Fuse.js index
@@ -45,11 +45,12 @@ Plans:
   2. Removing a required field from a CSV row causes the build to fail with a clear error message identifying the problem row and field
   3. All 525 records pass schema validation including dispensary name, owner, town, address, license type, and ownership tags
   4. Owner/parent company names are normalized so the same entity is not represented multiple ways
-**Plans:** 2/2 plans complete
+**Plans:** 3 plans (2 complete, 1 gap closure)
 
 Plans:
 - [x] 02-01-PLAN.md — Zod schema, XLSX parser, test infrastructure (Wave 1) (completed 2026-03-18)
-- [ ] 02-02-PLAN.md — Build pipeline script, Content Collections, reports (Wave 2)
+- [x] 02-02-PLAN.md — Build pipeline script, Content Collections, reports (Wave 2) (completed 2026-03-18)
+- [ ] 02-03-PLAN.md — Gap closure: fix headerMap mismatch (Owner/Parent), compute derived stats
 
 ### Phase 3: Detail Pages
 **Goal**: Every dispensary has its own pre-rendered page that Google can index, with ownership information, structured data, and cross-links to sibling locations
@@ -154,7 +155,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Project Scaffold and Deploy Pipeline | 1/1 | Complete    | 2026-03-18 |
-| 2. Data Pipeline | 2/2 | Complete   | 2026-03-18 |
+| 2. Data Pipeline | 2/3 | Gap closure   | - |
 | 3. Detail Pages | 0/TBD | Not started | - |
 | 4. Homepage and Card Layout | 0/TBD | Not started | - |
 | 5. Search System | 0/TBD | Not started | - |
