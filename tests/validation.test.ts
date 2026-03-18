@@ -77,9 +77,9 @@ describe('parseDispensarySheet', () => {
   function createTestWorkbook(
     dataRows: (string | number | null)[][],
     headers: string[] = [
-      'Trade Name', 'License #', 'Owner', 'Normalized Owner',
-      'Brand/Company', 'Parent Company', 'Address', 'Town', 'County',
-      'Phone', 'License Type', 'Ownership Details', 'Independent', 'Special Status',
+      'Trade Name', 'Legal Entity (MCC)', 'Address', 'Town', 'Zip', 'County',
+      'Type', 'License #', 'License Type', 'Special Status', 'Owner/Parent',
+      'Ownership Details', 'Ownership Source', 'Latitude', 'Longitude', 'Phone',
     ],
   ) {
     const wb = new ExcelJS.Workbook();
@@ -97,9 +97,31 @@ describe('parseDispensarySheet', () => {
     return wb;
   }
 
+  // Helper: build a row array matching the 16-column header order:
+  // Trade Name, Legal Entity (MCC), Address, Town, Zip, County, Type,
+  // License #, License Type, Special Status, Owner/Parent,
+  // Ownership Details, Ownership Source, Latitude, Longitude, Phone
+  function row(fields: {
+    tradeName?: string | null; legalEntity?: string | null; address?: string | null;
+    town?: string | null; zip?: string | null; county?: string | null;
+    type?: string | null; licenseNumber?: string | null; licenseType?: string | null;
+    specialStatus?: string | null; owner?: string | null;
+    ownershipDetails?: string | null; ownershipSource?: string | null;
+    lat?: string | null; lng?: string | null; phone?: string | null;
+  } = {}): (string | null)[] {
+    return [
+      fields.tradeName ?? null, fields.legalEntity ?? null, fields.address ?? null,
+      fields.town ?? null, fields.zip ?? null, fields.county ?? null,
+      fields.type ?? null, fields.licenseNumber ?? null, fields.licenseType ?? null,
+      fields.specialStatus ?? null, fields.owner ?? null,
+      fields.ownershipDetails ?? null, fields.ownershipSource ?? null,
+      fields.lat ?? null, fields.lng ?? null, fields.phone ?? null,
+    ];
+  }
+
   it('reads headers from row 4 of "Dispensary Directory" sheet', () => {
     const wb = createTestWorkbook([
-      ['Test Shop', 'MR-001', null, null, null, null, null, null, null, null, null, null, null, null],
+      row({ tradeName: 'Test Shop', licenseNumber: 'MR-001' }),
     ]);
     const result = parseDispensarySheet(wb);
     expect(result.records.length).toBe(1);
@@ -108,8 +130,8 @@ describe('parseDispensarySheet', () => {
 
   it('extracts data rows starting from row 5', () => {
     const wb = createTestWorkbook([
-      ['Shop A', 'MR-001', null, null, null, null, null, null, null, null, null, null, null, null],
-      ['Shop B', 'MR-002', null, null, null, null, null, null, null, null, null, null, null, null],
+      row({ tradeName: 'Shop A', licenseNumber: 'MR-001' }),
+      row({ tradeName: 'Shop B', licenseNumber: 'MR-002' }),
     ]);
     const result = parseDispensarySheet(wb);
     expect(result.records.length).toBe(2);
@@ -119,9 +141,9 @@ describe('parseDispensarySheet', () => {
 
   it('skips empty rows (no Trade Name and no License #)', () => {
     const wb = createTestWorkbook([
-      ['Shop A', 'MR-001', null, null, null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null, null, null, null, null],
-      ['Shop B', 'MR-002', null, null, null, null, null, null, null, null, null, null, null, null],
+      row({ tradeName: 'Shop A', licenseNumber: 'MR-001' }),
+      row(),
+      row({ tradeName: 'Shop B', licenseNumber: 'MR-002' }),
     ]);
     const result = parseDispensarySheet(wb);
     expect(result.records.length).toBe(2);
@@ -129,19 +151,41 @@ describe('parseDispensarySheet', () => {
 
   it('returns validated Dispensary objects for valid rows', () => {
     const wb = createTestWorkbook([
-      ['Good Shop', 'MR-100', 'Jane', null, null, null, '123 Main', 'Boston', 'Suffolk', '617-555-1234', 'Retail', 'Owner info', 'Yes', 'Woman-Owned'],
+      row({
+        tradeName: 'Good Shop', licenseNumber: 'MR-100', owner: 'Jane',
+        legalEntity: 'Good Shop LLC', address: '123 Main', town: 'Boston',
+        county: 'Suffolk', phone: '617-555-1234', licenseType: 'Retail',
+        ownershipDetails: 'Owner info', specialStatus: 'Woman-Owned',
+      }),
     ]);
     const result = parseDispensarySheet(wb);
     expect(result.records.length).toBe(1);
     expect(result.records[0].tradeName).toBe('Good Shop');
     expect(result.records[0].licenseNumber).toBe('MR-100');
     expect(result.records[0].specialStatusTags).toEqual(['Woman-Owned']);
-    expect(result.records[0].independent).toBe('Yes');
+  });
+
+  it('maps Owner/Parent column to owner field', () => {
+    const wb = createTestWorkbook([
+      row({ tradeName: 'Owned Shop', licenseNumber: 'MR-200', owner: 'John Doe' }),
+    ]);
+    const result = parseDispensarySheet(wb);
+    expect(result.records.length).toBe(1);
+    expect(result.records[0].owner).toBe('John Doe');
+  });
+
+  it('maps Legal Entity (MCC) column to parentCompany field', () => {
+    const wb = createTestWorkbook([
+      row({ tradeName: 'Entity Shop', licenseNumber: 'MR-300', legalEntity: 'MCC Corp' }),
+    ]);
+    const result = parseDispensarySheet(wb);
+    expect(result.records.length).toBe(1);
+    expect(result.records[0].parentCompany).toBe('MCC Corp');
   });
 
   it('returns errors array with row number and field name for invalid rows', () => {
     const wb = createTestWorkbook([
-      [null, 'MR-BAD', null, null, null, null, null, null, null, null, null, null, null, null],
+      row({ licenseNumber: 'MR-BAD' }),
     ]);
     const result = parseDispensarySheet(wb);
     expect(result.errors.length).toBeGreaterThan(0);
@@ -151,7 +195,7 @@ describe('parseDispensarySheet', () => {
 
   it('error message includes "Row N (License #XXX):" format', () => {
     const wb = createTestWorkbook([
-      [null, 'MR-BAD', null, null, null, null, null, null, null, null, null, null, null, null],
+      row({ licenseNumber: 'MR-BAD' }),
     ]);
     const result = parseDispensarySheet(wb);
     expect(result.errors[0]).toMatch(/Row 5 \(License #MR-BAD\)/);
@@ -159,7 +203,7 @@ describe('parseDispensarySheet', () => {
 
   it('error message for row without license includes "Row N (unknown):"', () => {
     const wb = createTestWorkbook([
-      ['Has Name', null, null, null, null, null, null, null, null, null, null, null, null, null],
+      row({ tradeName: 'Has Name' }),
     ]);
     const result = parseDispensarySheet(wb);
     expect(result.errors[0]).toMatch(/Row 5 \(unknown\)/);
@@ -167,7 +211,7 @@ describe('parseDispensarySheet', () => {
 
   it('sets needsNarrative=true when ownershipDetails is null/empty', () => {
     const wb = createTestWorkbook([
-      ['Shop', 'MR-001', 'Owner', null, null, null, null, null, null, null, null, null, null, null],
+      row({ tradeName: 'Shop', licenseNumber: 'MR-001', owner: 'Owner' }),
     ]);
     const result = parseDispensarySheet(wb);
     expect(result.records[0].needsNarrative).toBe(true);
@@ -175,7 +219,7 @@ describe('parseDispensarySheet', () => {
 
   it('sets researchInconclusive=true when owner matches pattern', () => {
     const wb = createTestWorkbook([
-      ['Shop', 'MR-001', 'Research inconclusive', null, null, null, null, null, null, null, null, null, null, null],
+      row({ tradeName: 'Shop', licenseNumber: 'MR-001', owner: 'Research inconclusive' }),
     ]);
     const result = parseDispensarySheet(wb);
     expect(result.records[0].researchInconclusive).toBe(true);
@@ -183,7 +227,7 @@ describe('parseDispensarySheet', () => {
 
   it('generates a slug from tradeName', () => {
     const wb = createTestWorkbook([
-      ['Green Leaf Dispensary', 'MR-001', null, null, null, null, null, null, null, null, null, null, null, null],
+      row({ tradeName: 'Green Leaf Dispensary', licenseNumber: 'MR-001' }),
     ]);
     const result = parseDispensarySheet(wb);
     expect(result.records[0].slug).toBe('green-leaf-dispensary');

@@ -8,18 +8,18 @@ import type { Dispensary, Stats } from '../schemas/dispensary';
 const headerMap: Record<string, string> = {
   'Trade Name': 'tradeName',
   'License #': 'licenseNumber',
-  'Owner': 'owner',
-  'Normalized Owner': 'normalizedOwner',
-  'Brand/Company': 'brandCompany',
-  'Parent Company': 'parentCompany',
+  'Owner/Parent': 'owner',
+  'Legal Entity (MCC)': 'parentCompany',
   'Address': 'address',
   'Town': 'town',
   'County': 'county',
   'Phone': 'phone',
+  'Type': 'licenseType',
   'License Type': 'licenseType',
   'Ownership Details': 'ownershipDetails',
-  'Independent': 'independent',
   'Special Status': 'specialStatus',
+  // Unmapped columns present in XLSX but not in schema:
+  // 'Zip', 'Ownership Source', 'Latitude', 'Longitude'
 };
 
 /**
