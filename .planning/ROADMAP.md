@@ -12,7 +12,7 @@ This roadmap delivers a search-first, SEO-optimized static directory that answer
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Project Scaffold and Deploy Pipeline** - Astro project with Tailwind CSS, Cloudflare Pages deployment from git push
+- [x] **Phase 1: Project Scaffold and Deploy Pipeline** - Astro project with Tailwind CSS, Cloudflare Pages deployment from git push (completed 2026-03-18)
 - [ ] **Phase 2: Data Pipeline** - CSV-to-JSON transformation with Zod schema validation that fails the build on bad data
 - [ ] **Phase 3: Detail Pages** - 525 pre-rendered dispensary pages with SEO-friendly URLs, structured data, and ownership narratives
 - [ ] **Phase 4: Homepage and Card Layout** - Responsive homepage with hero section, stats banner, and browsable card grid
@@ -31,7 +31,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Running `git push` to main triggers an automatic build and deploy on Cloudflare Pages
   2. The deployed site loads a placeholder page at the production URL on meredithmcgee.org
   3. Tailwind CSS utility classes render correctly on the deployed site
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 
 Plans:
 - [ ] 01-01-PLAN.md — Scaffold Astro 5 + Tailwind CSS v4, push to GitHub, connect Cloudflare Pages deploy pipeline
@@ -153,7 +153,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Project Scaffold and Deploy Pipeline | 0/1 | Planning complete | - |
+| 1. Project Scaffold and Deploy Pipeline | 1/1 | Complete   | 2026-03-18 |
 | 2. Data Pipeline | 0/TBD | Not started | - |
 | 3. Detail Pages | 0/TBD | Not started | - |
 | 4. Homepage and Card Layout | 0/TBD | Not started | - |
