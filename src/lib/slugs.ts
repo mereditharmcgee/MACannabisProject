@@ -51,7 +51,7 @@ export function deduplicateSlugs(
     seen.set(slug, indices);
   });
 
-  // Build final slugs
+  // Build final slugs, disambiguating by town first, then by numeric suffix if still colliding
   const finalSlugs: string[] = new Array(records.length);
   for (const [slug, indices] of seen) {
     if (indices.length === 1) {
@@ -63,6 +63,17 @@ export function deduplicateSlugs(
           records[i].town?.toLowerCase().replace(/\s+/g, '-') ?? 'unknown';
         finalSlugs[i] = `${slug}-${town}`;
       }
+    }
+  }
+
+  // Second pass: resolve any remaining collisions (same name + same town) with numeric suffix
+  const slugCounts = new Map<string, number>();
+  for (let i = 0; i < finalSlugs.length; i++) {
+    const s = finalSlugs[i];
+    const count = slugCounts.get(s) ?? 0;
+    slugCounts.set(s, count + 1);
+    if (count > 0) {
+      finalSlugs[i] = `${s}-${count + 1}`;
     }
   }
 

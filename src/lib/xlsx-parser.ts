@@ -1,6 +1,10 @@
 import ExcelJS from 'exceljs';
 import { dispensarySchema, specialStatusTags, statsSchema } from '../schemas/dispensary';
 import type { Dispensary, Stats } from '../schemas/dispensary';
+import { generateSlug, deduplicateSlugs } from './slugs';
+
+// Re-export generateSlug for backward compatibility
+export { generateSlug } from './slugs';
 
 /**
  * Map of XLSX header strings to schema field names.
@@ -70,17 +74,7 @@ export function parseSpecialStatusTags(raw: string | null): string[] {
     .filter((tag) => (specialStatusTags as readonly string[]).includes(tag));
 }
 
-/**
- * Generate a URL-safe slug from a trade name.
- */
-function generateSlug(tradeName: string): string {
-  return tradeName
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-}
+// generateSlug is now imported from ./slugs.ts (with legal suffix stripping)
 
 export interface ParseResult {
   records: Dispensary[];
@@ -113,7 +107,6 @@ export function parseDispensarySheet(workbook: ExcelJS.Workbook): ParseResult {
   const records: Dispensary[] = [];
   const errors: string[] = [];
   const warnings: string[] = [];
-  const slugCounts = new Map<string, number>();
 
   sheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
     if (rowNumber <= 4) return;
@@ -139,17 +132,7 @@ export function parseDispensarySheet(workbook: ExcelJS.Workbook): ParseResult {
       rawData.owner ?? '',
     );
 
-    // Generate slug with deduplication
-    let slug = rawData.tradeName ? generateSlug(rawData.tradeName) : '';
-    if (slug) {
-      const count = slugCounts.get(slug) ?? 0;
-      slugCounts.set(slug, count + 1);
-      if (count > 0) {
-        slug = `${slug}-${count + 1}`;
-      }
-    }
-
-    // Build the record object for validation
+    // Build the record object for validation (slug assigned after loop via deduplicateSlugs)
     const record = {
       tradeName: rawData.tradeName ?? '',
       licenseNumber: rawData.licenseNumber ?? '',
@@ -167,7 +150,7 @@ export function parseDispensarySheet(workbook: ExcelJS.Workbook): ParseResult {
       specialStatusTags: parsedTags,
       needsNarrative,
       researchInconclusive,
-      slug,
+      slug: '', // placeholder, assigned below
     };
 
     // Validate through Zod
@@ -195,6 +178,14 @@ export function parseDispensarySheet(workbook: ExcelJS.Workbook): ParseResult {
     if (!rawData.address) {
       warnings.push(`Row ${rowNumber}: missing address`);
     }
+  });
+
+  // Assign deduplicated slugs (legal suffixes stripped, collisions disambiguated by town)
+  const slugs = deduplicateSlugs(
+    records.map((r) => ({ tradeName: r.tradeName, town: r.town ?? null }))
+  );
+  records.forEach((r, i) => {
+    r.slug = slugs[i];
   });
 
   return { records, errors, warnings };
