@@ -62,12 +62,12 @@ Plans:
   3. Each detail page contains a unique 2-3 sentence ownership narrative (not a formulaic template)
   4. Each detail page includes JSON-LD structured data that passes Google Rich Results Test validation
   5. Each detail page links to other dispensaries owned by the same owner/parent company, and those links work
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 03-01: TBD
-- [ ] 03-02: TBD
-- [ ] 03-03: TBD
+- [ ] 03-01-PLAN.md — Slug, narrative, JSON-LD, sibling lib modules with TDD tests + data pipeline update
+- [ ] 03-02-PLAN.md — Astro components and dynamic route rendering 525 detail pages
+- [ ] 03-03-PLAN.md — Visual and functional verification checkpoint
 
 ### Phase 4: Homepage and Card Layout
 **Goal**: Users land on a polished, responsive homepage with a "Who Owns Your Dispensary?" headline, key stats, and a browsable card grid of all dispensaries
@@ -156,7 +156,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 |-------|----------------|--------|-----------|
 | 1. Project Scaffold and Deploy Pipeline | 1/1 | Complete    | 2026-03-18 |
 | 2. Data Pipeline | 3/3 | Complete    | 2026-03-18 |
-| 3. Detail Pages | 0/TBD | Not started | - |
+| 3. Detail Pages | 0/3 | In progress | - |
 | 4. Homepage and Card Layout | 0/TBD | Not started | - |
 | 5. Search System | 0/TBD | Not started | - |
 | 6. Filter System | 0/TBD | Not started | - |
