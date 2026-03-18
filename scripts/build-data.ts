@@ -29,8 +29,29 @@ async function main() {
   // Parse Dispensary Directory sheet
   const { records, errors, warnings } = parseDispensarySheet(workbook);
 
-  // Parse Summary sheet
-  const stats = parseSummarySheet(workbook);
+  // Parse Summary sheet (totalLicenses only)
+  const summaryStats = parseSummarySheet(workbook);
+
+  // Compute totalTowns from distinct non-null town values
+  const towns = new Set(records.filter(r => r.town).map(r => r.town));
+  const totalTowns = towns.size;
+
+  // Compute percentIndependent from independent field
+  const withIndependent = records.filter(r => r.independent != null);
+  let percentIndependent = 0;
+  if (withIndependent.length > 0) {
+    const independentCount = withIndependent.filter(r => r.independent === 'Yes').length;
+    percentIndependent = Math.round((independentCount / records.length) * 100);
+  } else {
+    console.warn('Independent column not found in XLSX -- percentIndependent set to 0');
+  }
+
+  // Merge computed stats with Summary sheet stats
+  const stats = {
+    totalLicenses: summaryStats.totalLicenses || records.length,
+    percentIndependent,
+    totalTowns,
+  };
 
   // Check for fatal conditions
   if (records.length === 0) {

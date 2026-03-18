@@ -201,18 +201,17 @@ export function parseDispensarySheet(workbook: ExcelJS.Workbook): ParseResult {
 }
 
 /**
- * Parse the "Summary" sheet to extract aggregate stats.
- * Scans for labeled cells and reads adjacent values.
+ * Parse the "Summary" sheet to extract totalLicenses.
+ * Only the "Total Active Licenses" / "Total Licenses" row is present in the Summary sheet.
+ * percentIndependent and totalTowns are computed from dispensary records in build-data.ts.
  */
-export function parseSummarySheet(workbook: ExcelJS.Workbook): Stats {
+export function parseSummarySheet(workbook: ExcelJS.Workbook): Pick<Stats, 'totalLicenses'> {
   const sheet = workbook.getWorksheet('Summary');
   if (!sheet) {
-    return { totalLicenses: 0, percentIndependent: 0, totalTowns: 0 };
+    return { totalLicenses: 0 };
   }
 
   let totalLicenses = 0;
-  let percentIndependent = 0;
-  let totalTowns = 0;
 
   sheet.eachRow((row) => {
     const label = getCellString(row.getCell(1).value);
@@ -224,12 +223,8 @@ export function parseSummarySheet(workbook: ExcelJS.Workbook): Stats {
 
     if (lowerLabel.includes('active licenses') || lowerLabel.includes('total licenses')) {
       totalLicenses = typeof value === 'number' ? value : Number(value) || 0;
-    } else if (lowerLabel.includes('percent') && lowerLabel.includes('independent')) {
-      percentIndependent = typeof value === 'number' ? value : Number(value) || 0;
-    } else if (lowerLabel.includes('total towns') || lowerLabel.includes('towns')) {
-      totalTowns = typeof value === 'number' ? value : Number(value) || 0;
     }
   });
 
-  return statsSchema.parse({ totalLicenses, percentIndependent, totalTowns });
+  return { totalLicenses };
 }

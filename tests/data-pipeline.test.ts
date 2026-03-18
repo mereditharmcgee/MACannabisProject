@@ -57,8 +57,8 @@ describe('data-pipeline integration (test fixture)', () => {
 
     const stats = parseSummarySheet(workbook);
     expect(stats.totalLicenses).toBe(525);
-    expect(stats.percentIndependent).toBe(92);
-    expect(stats.totalTowns).toBe(157);
+    // percentIndependent and totalTowns are now computed in build-data.ts
+    // from dispensary records, not from the Summary sheet
   });
 });
 
