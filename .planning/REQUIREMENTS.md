@@ -85,13 +85,39 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (populated during roadmap creation) | | |
+| SRCH-01 | Phase 5: Search System | Pending |
+| SRCH-02 | Phase 5: Search System | Pending |
+| SRCH-03 | Phase 5: Search System | Pending |
+| SRCH-04 | Phase 6: Filter System | Pending |
+| SRCH-05 | Phase 6: Filter System | Pending |
+| SRCH-06 | Phase 6: Filter System | Pending |
+| SRCH-07 | Phase 6: Filter System | Pending |
+| SRCH-08 | Phase 4: Homepage and Card Layout | Pending |
+| DETL-01 | Phase 3: Detail Pages | Pending |
+| DETL-02 | Phase 3: Detail Pages | Pending |
+| DETL-03 | Phase 3: Detail Pages | Pending |
+| DETL-04 | Phase 3: Detail Pages | Pending |
+| DETL-05 | Phase 3: Detail Pages | Pending |
+| DETL-06 | Phase 3: Detail Pages | Pending |
+| DETL-07 | Phase 3: Detail Pages | Pending |
+| DATA-01 | Phase 2: Data Pipeline | Pending |
+| DATA-02 | Phase 2: Data Pipeline | Pending |
+| DATA-03 | Phase 5: Search System | Pending |
+| DATA-04 | Phase 8: Data Freshness and Launch Readiness | Pending |
+| TRST-01 | Phase 7: Trust and Legal | Pending |
+| TRST-02 | Phase 7: Trust and Legal | Pending |
+| TRST-03 | Phase 7: Trust and Legal | Pending |
+| TRST-04 | Phase 7: Trust and Legal | Pending |
+| DSGN-01 | Phase 4: Homepage and Card Layout | Pending |
+| DSGN-02 | Phase 8: Data Freshness and Launch Readiness | Pending |
+| DSGN-03 | Phase 4: Homepage and Card Layout | Pending |
+| DSGN-04 | Phase 1: Project Scaffold and Deploy Pipeline | Pending |
 
 **Coverage:**
-- v1 requirements: 22 total
-- Mapped to phases: 0
-- Unmapped: 22 (pending roadmap)
+- v1 requirements: 27 total
+- Mapped to phases: 27
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-17*
-*Last updated: 2026-03-17 after initial definition*
+*Last updated: 2026-03-17 after roadmap creation*

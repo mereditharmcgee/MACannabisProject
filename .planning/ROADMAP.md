@@ -1,0 +1,164 @@
+# Roadmap: MA Cannabis Dispensary Ownership Directory
+
+## Overview
+
+This roadmap delivers a search-first, SEO-optimized static directory that answers "who owns this dispensary?" for every licensed cannabis dispensary in Massachusetts. The build order follows the architecture's natural dependency chain: data foundation first (everything depends on clean data), then page generation (SEO value accrues immediately), then search and filters (primary interaction model), then trust/legal features (non-negotiable for launch), and finally performance tuning and launch readiness. Eight phases, each delivering a coherent, independently verifiable capability.
+
+## Phases
+
+**Phase Numbering:**
+- Integer phases (1, 2, 3): Planned milestone work
+- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
+
+Decimal phases appear between their surrounding integers in numeric order.
+
+- [ ] **Phase 1: Project Scaffold and Deploy Pipeline** - Astro project with Tailwind CSS, Cloudflare Pages deployment from git push
+- [ ] **Phase 2: Data Pipeline** - CSV-to-JSON transformation with Zod schema validation that fails the build on bad data
+- [ ] **Phase 3: Detail Pages** - 525 pre-rendered dispensary pages with SEO-friendly URLs, structured data, and ownership narratives
+- [ ] **Phase 4: Homepage and Card Layout** - Responsive homepage with hero section, stats banner, and browsable card grid
+- [ ] **Phase 5: Search System** - Instant typeahead search across dispensary names, towns, and owners with pre-built Fuse.js index
+- [ ] **Phase 6: Filter System** - Ownership badge filter pills, MSO/Independent toggle, and county dropdown operating on the card grid
+- [ ] **Phase 7: Trust and Legal** - Correction form, data disclaimer, last-verified dates, and Terms of Service
+- [ ] **Phase 8: Data Freshness and Launch Readiness** - Monthly update workflow, performance optimization, and launch checklist completion
+
+## Phase Details
+
+### Phase 1: Project Scaffold and Deploy Pipeline
+**Goal**: A working Astro project deploys to Cloudflare Pages on every git push with zero manual steps
+**Depends on**: Nothing (first phase)
+**Requirements**: DSGN-04
+**Success Criteria** (what must be TRUE):
+  1. Running `git push` to main triggers an automatic build and deploy on Cloudflare Pages
+  2. The deployed site loads a placeholder page at the production URL on meredithmcgee.org
+  3. Tailwind CSS utility classes render correctly on the deployed site
+**Plans**: TBD
+
+Plans:
+- [ ] 01-01: TBD
+- [ ] 01-02: TBD
+
+### Phase 2: Data Pipeline
+**Goal**: The 525-record spreadsheet transforms into validated, structured JSON at build time, and the build fails loudly on invalid data
+**Depends on**: Phase 1
+**Requirements**: DATA-01, DATA-02
+**Success Criteria** (what must be TRUE):
+  1. Running the build converts the CSV spreadsheet into structured JSON files consumable by Astro Content Collections
+  2. Removing a required field from a CSV row causes the build to fail with a clear error message identifying the problem row and field
+  3. All 525 records pass schema validation including dispensary name, owner, town, address, license type, and ownership tags
+  4. Owner/parent company names are normalized so the same entity is not represented multiple ways
+**Plans**: TBD
+
+Plans:
+- [ ] 02-01: TBD
+- [ ] 02-02: TBD
+
+### Phase 3: Detail Pages
+**Goal**: Every dispensary has its own pre-rendered page that Google can index, with ownership information, structured data, and cross-links to sibling locations
+**Depends on**: Phase 2
+**Requirements**: DETL-01, DETL-02, DETL-03, DETL-04, DETL-05, DETL-06, DETL-07
+**Success Criteria** (what must be TRUE):
+  1. Navigating to `/dispensary/[slug]/` loads a pre-rendered HTML page for each of the 525 dispensaries (no client-side rendering required)
+  2. Each detail page displays the dispensary name, owner/parent company, address, phone number (tap-to-call on mobile), license type, and ownership characteristic badges
+  3. Each detail page contains a unique 2-3 sentence ownership narrative (not a formulaic template)
+  4. Each detail page includes JSON-LD structured data that passes Google Rich Results Test validation
+  5. Each detail page links to other dispensaries owned by the same owner/parent company, and those links work
+**Plans**: TBD
+
+Plans:
+- [ ] 03-01: TBD
+- [ ] 03-02: TBD
+- [ ] 03-03: TBD
+
+### Phase 4: Homepage and Card Layout
+**Goal**: Users land on a polished, responsive homepage with a "Who Owns Your Dispensary?" headline, key stats, and a browsable card grid of all dispensaries
+**Depends on**: Phase 3
+**Requirements**: DSGN-01, DSGN-03, SRCH-08
+**Success Criteria** (what must be TRUE):
+  1. The homepage displays a prominent "Who Owns Your Dispensary?" headline with key stats (525 Active Licenses, 92% Independently Owned, 157 Towns)
+  2. Dispensaries appear as cards showing dispensary name, town, owner, and ownership badge tags
+  3. The card grid adapts from a single-column layout on mobile to a multi-column grid on desktop without horizontal scrolling
+  4. Clicking a card navigates to that dispensary's detail page
+**Plans**: TBD
+
+Plans:
+- [ ] 04-01: TBD
+- [ ] 04-02: TBD
+
+### Phase 5: Search System
+**Goal**: Users can find any dispensary instantly by typing a name, town, or owner into the search bar without waiting for a server response
+**Depends on**: Phase 4
+**Requirements**: SRCH-01, SRCH-02, SRCH-03, DATA-03
+**Success Criteria** (what must be TRUE):
+  1. Typing in the search bar produces matching results as the user types, with no page reload or submit button needed
+  2. Searching for a town name (e.g., "Worcester") shows all dispensaries in that town
+  3. Searching for an owner name (e.g., "Curaleaf") shows all dispensaries they own
+  4. The search index is pre-built at build time and served as static JSON (no server-side search infrastructure)
+  5. The card grid and browse experience remain visible and usable while the search index loads on slow connections
+**Plans**: TBD
+
+Plans:
+- [ ] 05-01: TBD
+- [ ] 05-02: TBD
+
+### Phase 6: Filter System
+**Goal**: Users can narrow the dispensary grid by ownership characteristics, corporate vs. independent status, and geographic location using visual filter controls
+**Depends on**: Phase 5
+**Requirements**: SRCH-04, SRCH-05, SRCH-06, SRCH-07
+**Success Criteria** (what must be TRUE):
+  1. Tapping an ownership filter pill (Women-Owned, Black-Owned, Veteran-Owned, Social Equity, LGBTQ+-Owned) immediately filters the visible card grid
+  2. Multiple filter pills can be active simultaneously (e.g., Women-Owned + Independent) and results reflect the intersection
+  3. The MSO Corporate vs. Independent toggle filters the grid to show only matching dispensaries
+  4. The county dropdown filters dispensaries to only those in the selected county
+  5. Filters compose with search (searching "Boston" then filtering "Women-Owned" shows only women-owned dispensaries in Boston results)
+**Plans**: TBD
+
+Plans:
+- [ ] 06-01: TBD
+- [ ] 06-02: TBD
+
+### Phase 7: Trust and Legal
+**Goal**: Every listing has a correction mechanism and the site communicates data accuracy context, protecting both users and the publisher
+**Depends on**: Phase 3
+**Requirements**: TRST-01, TRST-02, TRST-03, TRST-04
+**Success Criteria** (what must be TRUE):
+  1. Each dispensary detail page has a "Suggest a Correction" form that submits without requiring a login or account
+  2. Each listing displays a "Last verified" date showing when the ownership data was last confirmed
+  3. The site displays a prominent data accuracy disclaimer explaining data sources and limitations
+  4. A Terms of Service / data usage notice page exists and is linked from the site footer
+**Plans**: TBD
+
+Plans:
+- [ ] 07-01: TBD
+- [ ] 07-02: TBD
+
+### Phase 8: Data Freshness and Launch Readiness
+**Goal**: The monthly data update process is documented and repeatable, the site meets performance targets, and all launch-blocking items are resolved
+**Depends on**: Phase 7, Phase 6
+**Requirements**: DATA-04, DSGN-02
+**Success Criteria** (what must be TRUE):
+  1. A documented workflow exists: update CSV, push to git, site automatically rebuilds and deploys with new data
+  2. The homepage loads in under 2 seconds on a simulated 3G mobile connection
+  3. All 525 detail page URLs return 200 status codes on the production deployment
+  4. The sitemap.xml includes all dispensary and owner pages and is accessible to search engines
+**Plans**: TBD
+
+Plans:
+- [ ] 08-01: TBD
+- [ ] 08-02: TBD
+
+## Progress
+
+**Execution Order:**
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
+(Phase 7 depends on Phase 3, so it can potentially run in parallel with 4-6, but sequential execution is simpler.)
+
+| Phase | Plans Complete | Status | Completed |
+|-------|----------------|--------|-----------|
+| 1. Project Scaffold and Deploy Pipeline | 0/TBD | Not started | - |
+| 2. Data Pipeline | 0/TBD | Not started | - |
+| 3. Detail Pages | 0/TBD | Not started | - |
+| 4. Homepage and Card Layout | 0/TBD | Not started | - |
+| 5. Search System | 0/TBD | Not started | - |
+| 6. Filter System | 0/TBD | Not started | - |
+| 7. Trust and Legal | 0/TBD | Not started | - |
+| 8. Data Freshness and Launch Readiness | 0/TBD | Not started | - |
