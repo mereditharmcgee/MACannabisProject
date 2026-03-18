@@ -1,35 +1,60 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import DispensaryGridCard from "../components/DispensaryGridCard.astro";
+import { getCollection } from "astro:content";
+
+const dispensaryEntries = await getCollection("dispensaries");
+const sorted = dispensaryEntries
+  .map((e) => e.data)
+  .sort((a, b) => a.tradeName.localeCompare(b.tradeName));
+
+const statsEntries = await getCollection("stats");
+const statsData = statsEntries[0]?.data ?? { totalLicenses: 525, totalTowns: 156 };
+const { totalLicenses, totalTowns } = statsData;
 ---
 
 <BaseLayout>
-  <main class="flex flex-col items-center justify-center min-h-screen px-4 py-16">
-    <div class="max-w-2xl mx-auto text-center">
-      <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-        Who Owns Your Dispensary?
-      </h1>
-      <p class="mt-4 text-lg text-gray-600">
-        MA Cannabis Directory &mdash; Coming Soon
-      </p>
+  <section class="text-center py-12 px-4 bg-gray-50">
+    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+      Who Owns Your Dispensary?
+    </h1>
+    <p class="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
+      A transparent directory of every licensed cannabis dispensary in Massachusetts and who owns them.
+    </p>
 
-      <div class="grid grid-cols-1 gap-6 mt-12 sm:grid-cols-3">
-        <div class="p-6 bg-white rounded-lg shadow-sm">
-          <p class="text-3xl font-bold text-green-700">525</p>
-          <p class="mt-1 text-sm text-gray-500">Active Licenses</p>
-        </div>
-        <div class="p-6 bg-white rounded-lg shadow-sm">
-          <p class="text-3xl font-bold text-green-700">92%</p>
-          <p class="mt-1 text-sm text-gray-500">Independently Owned</p>
-        </div>
-        <div class="p-6 bg-white rounded-lg shadow-sm">
-          <p class="text-3xl font-bold text-green-700">157</p>
-          <p class="mt-1 text-sm text-gray-500">Towns</p>
-        </div>
+    <!-- Phase 5: search bar goes here -->
+
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-lg mx-auto">
+      <div class="p-6 bg-white rounded-lg shadow-sm">
+        <p class="text-3xl font-bold text-green-700">{totalLicenses}</p>
+        <p class="mt-1 text-sm text-gray-500">Active Licenses</p>
+      </div>
+      <div class="p-6 bg-white rounded-lg shadow-sm">
+        <p class="text-3xl font-bold text-green-700">92%</p>
+        <p class="mt-1 text-sm text-gray-500">Independently Owned</p>
+      </div>
+      <div class="p-6 bg-white rounded-lg shadow-sm">
+        <p class="text-3xl font-bold text-green-700">{totalTowns}</p>
+        <p class="mt-1 text-sm text-gray-500">Towns</p>
       </div>
     </div>
+  </section>
 
-    <footer class="mt-16">
-      <p class="text-xs text-gray-400">A project by Meredith McGee</p>
-    </footer>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <p class="text-sm text-gray-500 mb-4">Showing {sorted.length} dispensaries</p>
+
+    <!-- Phase 6: filter pills go here -->
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sorted.map((dispensary) => (
+        <DispensaryGridCard dispensary={dispensary} />
+      ))}
+    </div>
   </main>
+
+  <footer class="max-w-7xl mx-auto px-4 py-8 border-t border-gray-200 text-center">
+    <p class="text-sm text-gray-500">A project by Meredith McGee</p>
+    <p class="text-xs text-gray-400 mt-1">Data sourced from Massachusetts Cannabis Control Commission public records.</p>
+    <!-- Phase 7: Terms of Service link goes here -->
+  </footer>
 </BaseLayout>
