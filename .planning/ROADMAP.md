@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Project Scaffold and Deploy Pipeline** - Astro project with Tailwind CSS, Cloudflare Pages deployment from git push (completed 2026-03-18)
 - [x] **Phase 2: Data Pipeline** - CSV-to-JSON transformation with Zod schema validation that fails the build on bad data (completed 2026-03-18)
-- [ ] **Phase 3: Detail Pages** - 525 pre-rendered dispensary pages with SEO-friendly URLs, structured data, and ownership narratives
+- [x] **Phase 3: Detail Pages** - 525 pre-rendered dispensary pages with SEO-friendly URLs, structured data, and ownership narratives (completed 2026-03-18)
 - [ ] **Phase 4: Homepage and Card Layout** - Responsive homepage with hero section, stats banner, and browsable card grid
 - [ ] **Phase 5: Search System** - Instant typeahead search across dispensary names, towns, and owners with pre-built Fuse.js index
 - [ ] **Phase 6: Filter System** - Ownership badge filter pills, MSO/Independent toggle, and county dropdown operating on the card grid
@@ -62,12 +62,12 @@ Plans:
   3. Each detail page contains a unique 2-3 sentence ownership narrative (not a formulaic template)
   4. Each detail page includes JSON-LD structured data that passes Google Rich Results Test validation
   5. Each detail page links to other dispensaries owned by the same owner/parent company, and those links work
-**Plans:** 3 plans
+**Plans:** 3/3 plans complete
 
 Plans:
-- [ ] 03-01-PLAN.md — Slug, narrative, JSON-LD, sibling lib modules with TDD tests + data pipeline update
-- [ ] 03-02-PLAN.md — Astro components and dynamic route rendering 525 detail pages
-- [ ] 03-03-PLAN.md — Visual and functional verification checkpoint
+- [x] 03-01-PLAN.md — Slug, narrative, JSON-LD, sibling lib modules with TDD tests + data pipeline update (completed 2026-03-18)
+- [x] 03-02-PLAN.md — Astro components and dynamic route rendering 525 detail pages (completed 2026-03-18)
+- [x] 03-03-PLAN.md — Visual and functional verification checkpoint (completed 2026-03-18)
 
 ### Phase 4: Homepage and Card Layout
 **Goal**: Users land on a polished, responsive homepage with a "Who Owns Your Dispensary?" headline, key stats, and a browsable card grid of all dispensaries
@@ -156,7 +156,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 |-------|----------------|--------|-----------|
 | 1. Project Scaffold and Deploy Pipeline | 1/1 | Complete    | 2026-03-18 |
 | 2. Data Pipeline | 3/3 | Complete    | 2026-03-18 |
-| 3. Detail Pages | 0/3 | In progress | - |
+| 3. Detail Pages | 3/3 | Complete | 2026-03-18 |
 | 4. Homepage and Card Layout | 0/TBD | Not started | - |
 | 5. Search System | 0/TBD | Not started | - |
 | 6. Filter System | 0/TBD | Not started | - |
