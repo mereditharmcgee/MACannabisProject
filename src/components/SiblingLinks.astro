@@ -1,0 +1,33 @@
+---
+interface SiblingEntry {
+  tradeName: string;
+  slug: string;
+  town: string | null;
+  [key: string]: unknown;
+}
+
+interface Props {
+  siblings: SiblingEntry[];
+}
+
+const { siblings } = Astro.props;
+---
+
+{siblings.length > 0 && (
+  <section class="mt-8 pt-6 border-t border-gray-200">
+    <h2 class="text-lg font-semibold text-gray-700 mb-3">Other Locations by This Owner</h2>
+    <ul class="space-y-2">
+      {siblings.map((s) => (
+        <li>
+          <a
+            href={`/dispensary/${s.slug}/`}
+            class="text-green-700 hover:underline font-medium"
+          >
+            {s.tradeName}
+          </a>
+          {s.town && <span class="text-gray-500 ml-1">({s.town})</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

@@ -1,0 +1,24 @@
+---
+interface Props {
+  tag: string;
+}
+
+const { tag } = Astro.props;
+
+const colorMap: Record<string, string> = {
+  'Economic Empowerment': 'bg-purple-100 text-purple-800 border-purple-200',
+  'Social Equity': 'bg-blue-100 text-blue-800 border-blue-200',
+  'MTC Priority': 'bg-amber-100 text-amber-800 border-amber-200',
+  'Woman-Owned': 'bg-pink-100 text-pink-800 border-pink-200',
+  'Minority-Owned': 'bg-teal-100 text-teal-800 border-teal-200',
+  'Veteran-Owned': 'bg-green-100 text-green-800 border-green-200',
+  'LGBTQ+-Owned': 'bg-rose-100 text-rose-800 border-rose-200',
+  'Disability-Owned': 'bg-indigo-100 text-indigo-800 border-indigo-200',
+};
+
+const colors = colorMap[tag] ?? 'bg-gray-100 text-gray-800 border-gray-200';
+---
+
+<span class={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border ${colors}`}>
+  {tag}
+</span>

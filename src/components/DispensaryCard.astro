@@ -1,0 +1,145 @@
+---
+import OwnershipBadge from './OwnershipBadge.astro';
+import SiblingLinks from './SiblingLinks.astro';
+
+interface Dispensary {
+  tradeName: string;
+  owner: string | null;
+  parentCompany: string | null;
+  address: string | null;
+  town: string | null;
+  phone: string | null;
+  licenseType: string | null;
+  specialStatusTags: string[];
+  researchInconclusive: boolean;
+  [key: string]: unknown;
+}
+
+interface Narrative {
+  text: string;
+  type: string;
+}
+
+interface SiblingEntry {
+  tradeName: string;
+  slug: string;
+  town: string | null;
+  [key: string]: unknown;
+}
+
+interface Props {
+  dispensary: Dispensary;
+  narrative: Narrative;
+  siblings: SiblingEntry[];
+}
+
+const { dispensary, narrative, siblings } = Astro.props;
+
+// Build Google Maps URL
+const mapsQuery = [dispensary.address, dispensary.town, 'MA'].filter(Boolean).join(', ');
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
+
+// Format phone for tel: href (strip to digits and leading +)
+const phoneHref = dispensary.phone
+  ? `tel:${dispensary.phone.replace(/[^\d+]/g, '')}`
+  : null;
+
+// Determine owner display: show parentCompany if different from owner
+const ownerDisplay = dispensary.owner
+  ? dispensary.owner.replace(/\s*\(.*?\)\s*/g, '').trim()
+  : null;
+const showParentCompany =
+  dispensary.parentCompany &&
+  ownerDisplay &&
+  dispensary.parentCompany.toLowerCase() !== ownerDisplay.toLowerCase();
+---
+
+<a href="/" class="inline-block mb-4 text-green-700 hover:underline text-sm">&larr; Back to Directory</a>
+
+<article class="bg-white rounded-xl shadow-md max-w-2xl mx-auto overflow-hidden">
+  <div class="p-6 sm:p-8">
+    {/* Header: Name and Badges */}
+    <header class="mb-6">
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">{dispensary.tradeName}</h1>
+      {dispensary.specialStatusTags.length > 0 && (
+        <div class="flex flex-wrap gap-2">
+          {dispensary.specialStatusTags.map((tag) => (
+            <OwnershipBadge tag={tag} />
+          ))}
+        </div>
+      )}
+    </header>
+
+    {/* Owner Section (hidden for researchInconclusive) */}
+    {!dispensary.researchInconclusive && ownerDisplay && (
+      <section class="mb-5">
+        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">Owner</h2>
+        <p class="text-lg text-gray-800 font-medium">{ownerDisplay}</p>
+        {showParentCompany && (
+          <p class="text-sm text-gray-600 mt-0.5">{dispensary.parentCompany}</p>
+        )}
+      </section>
+    )}
+
+    {/* Narrative Section (hidden for researchInconclusive) */}
+    {!dispensary.researchInconclusive && narrative.type === 'full' && (
+      <section class="mb-6">
+        <p class="text-gray-700 leading-relaxed">{narrative.text}</p>
+      </section>
+    )}
+    {!dispensary.researchInconclusive && narrative.type === 'pending' && (
+      <section class="mb-6">
+        <p class="text-gray-500 italic leading-relaxed">{narrative.text}</p>
+      </section>
+    )}
+
+    {/* Researching Notice (for researchInconclusive) */}
+    {dispensary.researchInconclusive && (
+      <div class="mb-6 bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <p class="text-gray-600 text-sm">
+          Ownership information for this dispensary is being researched.
+        </p>
+      </div>
+    )}
+
+    {/* Facts Section */}
+    <section class="border-t border-gray-100 pt-5">
+      <dl class="grid grid-cols-1 gap-4">
+        {dispensary.address && (
+          <div>
+            <dt class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Address</dt>
+            <dd class="mt-0.5">
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-green-700 hover:underline"
+              >
+                {dispensary.address}{dispensary.town ? `, ${dispensary.town}, MA` : ', MA'}
+              </a>
+            </dd>
+          </div>
+        )}
+        {dispensary.phone && phoneHref && (
+          <div>
+            <dt class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Phone</dt>
+            <dd class="mt-0.5">
+              <a href={phoneHref} class="text-green-700 hover:underline">{dispensary.phone}</a>
+            </dd>
+          </div>
+        )}
+        {dispensary.licenseType && (
+          <div>
+            <dt class="text-sm font-semibold text-gray-500 uppercase tracking-wide">License Type</dt>
+            <dd class="mt-0.5 text-gray-800">{dispensary.licenseType}</dd>
+          </div>
+        )}
+      </dl>
+    </section>
+
+    {/* Sibling Links (hidden for researchInconclusive) */}
+    {!dispensary.researchInconclusive && (
+      <SiblingLinks siblings={siblings} />
+    )}
+  </div>
+</article>
