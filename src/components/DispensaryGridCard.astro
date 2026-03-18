@@ -1,0 +1,50 @@
+---
+import { toTitleCase, getLicenseLabel } from '../lib/format';
+import OwnershipBadge from './OwnershipBadge.astro';
+
+interface Props {
+  dispensary: {
+    tradeName: string;
+    slug: string;
+    town: string | null;
+    owner: string | null;
+    licenseType: string | null;
+    specialStatusTags: string[];
+  };
+}
+
+const { dispensary } = Astro.props;
+
+const displayName = toTitleCase(dispensary.tradeName);
+const licenseLabel = getLicenseLabel(dispensary.licenseType);
+const displayOwner = dispensary.owner
+  ? dispensary.owner.replace(/\s*\(.*?\)\s*/g, '').trim()
+  : null;
+---
+
+<a
+  href={`/dispensary/${dispensary.slug}/`}
+  class="block bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-5"
+  style="content-visibility: auto; contain-intrinsic-size: auto 280px;"
+>
+  <div class="flex items-start justify-between gap-2 mb-2">
+    <h2 class="text-lg font-semibold text-gray-900 line-clamp-2">{displayName}</h2>
+    {licenseLabel && (
+      <span class="text-xs text-gray-500 shrink-0 mt-1">{licenseLabel}</span>
+    )}
+  </div>
+
+  {dispensary.town && (
+    <p class="text-sm text-gray-500 mb-1">{dispensary.town}, MA</p>
+  )}
+
+  {displayOwner && (
+    <p class="text-sm text-gray-600 truncate mb-2" title={displayOwner}>{displayOwner}</p>
+  )}
+
+  <div class="min-h-[2rem] flex flex-wrap gap-1.5 items-start">
+    {dispensary.specialStatusTags.map((tag) => (
+      <OwnershipBadge tag={tag} />
+    ))}
+  </div>
+</a>
