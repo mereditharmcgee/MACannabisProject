@@ -94,11 +94,11 @@ Plans:
   3. Searching for an owner name (e.g., "Curaleaf") shows all dispensaries they own
   4. The search index is pre-built at build time and served as static JSON (no server-side search infrastructure)
   5. The card grid and browse experience remain visible and usable while the search index loads on slow connections
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 05-01: TBD
-- [ ] 05-02: TBD
+- [ ] 05-01-PLAN.md — Build-time Fuse.js search index generation, search bar UI, and client-side search logic (Wave 1)
+- [ ] 05-02-PLAN.md — Visual and functional verification checkpoint (Wave 2)
 
 ### Phase 6: Filter System
 **Goal**: Users can narrow the dispensary grid by ownership characteristics, corporate vs. independent status, and geographic location using visual filter controls
@@ -158,7 +158,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 2. Data Pipeline | 3/3 | Complete    | 2026-03-18 |
 | 3. Detail Pages | 3/3 | Complete    | 2026-03-18 |
 | 4. Homepage and Card Layout | 2/2 | Complete    | 2026-03-18 |
-| 5. Search System | 0/TBD | Not started | - |
+| 5. Search System | 0/2 | Not started | - |
 | 6. Filter System | 0/TBD | Not started | - |
 | 7. Trust and Legal | 0/TBD | Not started | - |
 | 8. Data Freshness and Launch Readiness | 0/TBD | Not started | - |
