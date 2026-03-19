@@ -22,7 +22,28 @@ const { totalLicenses, totalTowns } = statsData;
       A transparent directory of every licensed cannabis dispensary in Massachusetts and who owns them.
     </p>
 
-    <!-- Phase 5: search bar goes here -->
+    <div class="mt-6 max-w-xl mx-auto relative">
+      <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <input
+        type="search"
+        id="search-input"
+        placeholder="Search by name, town, or owner"
+        autocomplete="off"
+        class="w-full pl-12 pr-12 py-4 text-lg rounded-xl border border-gray-300 shadow-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none"
+      />
+      <button
+        type="button"
+        id="search-clear"
+        class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 hidden"
+        aria-label="Clear search"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
 
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-lg mx-auto">
       <div class="p-6 bg-white rounded-lg shadow-sm">
@@ -41,14 +62,20 @@ const { totalLicenses, totalTowns } = statsData;
   </section>
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <p class="text-sm text-gray-500 mb-4">Showing {sorted.length} dispensaries</p>
+    <p id="result-count" class="text-sm text-gray-500 mb-4">Showing {sorted.length} of {sorted.length} dispensaries</p>
 
     <!-- Phase 6: filter pills go here -->
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div id="dispensary-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {sorted.map((dispensary) => (
-        <DispensaryGridCard dispensary={dispensary} />
+        <div data-slug={dispensary.slug}>
+          <DispensaryGridCard dispensary={dispensary} />
+        </div>
       ))}
+    </div>
+
+    <div id="no-results" class="hidden text-center py-12">
+      <p class="text-lg text-gray-500">No dispensaries match '<span id="no-results-query"></span>'. Try a different name, town, or owner.</p>
     </div>
   </main>
 
@@ -58,3 +85,194 @@ const { totalLicenses, totalTowns } = statsData;
     <!-- Phase 7: Terms of Service link goes here -->
   </footer>
 </BaseLayout>
+
+<script>
+  import Fuse from 'fuse.js';
+
+  interface SearchRecord {
+    slug: string;
+    tradeName: string;
+    town: string;
+    owner: string;
+  }
+
+  const FUSE_OPTIONS = {
+    keys: [
+      { name: 'tradeName' as const, weight: 2 },
+      { name: 'town' as const, weight: 1 },
+      { name: 'owner' as const, weight: 1 },
+    ],
+    threshold: 0.3,
+    ignoreLocation: true,
+    minMatchCharLength: 1,
+    shouldSort: true,
+  };
+
+  // State: null = show all, Set = show only matching slugs
+  let searchMatchSlugs: Set<string> | null = null;
+  let fuse: Fuse<SearchRecord> | null = null;
+  let totalCards = 0;
+
+  function debounce<T extends (...args: unknown[]) => void>(fn: T, ms: number): T {
+    let id: ReturnType<typeof setTimeout>;
+    return ((...args: unknown[]) => { clearTimeout(id); id = setTimeout(() => fn(...args), ms); }) as T;
+  }
+
+  async function initSearch() {
+    const [dataRes, indexRes] = await Promise.all([
+      fetch('/data/search-data.json'),
+      fetch('/data/search-index.json'),
+    ]);
+
+    const searchData: SearchRecord[] = await dataRes.json();
+    const indexData = await indexRes.json();
+
+    const parsedIndex = Fuse.parseIndex<SearchRecord>(indexData);
+    fuse = new Fuse<SearchRecord>(searchData, FUSE_OPTIONS, parsedIndex);
+
+    // Check for ?q= in URL
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
+    if (q) {
+      const input = document.getElementById('search-input') as HTMLInputElement;
+      input.value = q;
+      toggleClearButton(q);
+      performSearch(q);
+    }
+  }
+
+  function performSearch(query: string) {
+    if (!query.trim()) {
+      searchMatchSlugs = null;
+      applyVisibility();
+      updateURL('');
+      return;
+    }
+
+    if (!fuse) return;
+
+    const results = fuse.search(query);
+    searchMatchSlugs = new Set(results.map(r => r.item.slug));
+    applyVisibility();
+    updateURL(query);
+  }
+
+  function applyVisibility() {
+    const grid = document.getElementById('dispensary-grid')!;
+    const cards = grid.querySelectorAll<HTMLElement>('[data-slug]');
+    const resultCount = document.getElementById('result-count')!;
+    const noResults = document.getElementById('no-results')!;
+    const noResultsQuery = document.getElementById('no-results-query')!;
+
+    if (searchMatchSlugs === null) {
+      // Show all, restore alphabetical order
+      const fragment = document.createDocumentFragment();
+      const sorted = Array.from(cards).sort((a, b) => {
+        const sa = a.getAttribute('data-slug') || '';
+        const sb = b.getAttribute('data-slug') || '';
+        return sa.localeCompare(sb);
+      });
+      for (const card of sorted) {
+        card.style.display = '';
+        fragment.appendChild(card);
+      }
+      grid.appendChild(fragment);
+      resultCount.textContent = `Showing ${cards.length} of ${totalCards} dispensaries`;
+      noResults.classList.add('hidden');
+      return;
+    }
+
+    // Relevance ordering: matching cards first in result order, then hidden cards
+    const fragment = document.createDocumentFragment();
+    const matchMap = new Map<string, HTMLElement>();
+    const nonMatch: HTMLElement[] = [];
+
+    for (const card of cards) {
+      const slug = card.getAttribute('data-slug') || '';
+      if (searchMatchSlugs.has(slug)) {
+        matchMap.set(slug, card);
+      } else {
+        nonMatch.push(card);
+      }
+    }
+
+    // Append matches in result order (Set preserves insertion order)
+    for (const slug of searchMatchSlugs) {
+      const card = matchMap.get(slug);
+      if (card) {
+        card.style.display = '';
+        fragment.appendChild(card);
+      }
+    }
+
+    // Append non-matches hidden
+    for (const card of nonMatch) {
+      card.style.display = 'none';
+      fragment.appendChild(card);
+    }
+
+    grid.appendChild(fragment);
+
+    const visibleCount = searchMatchSlugs.size;
+    resultCount.textContent = `Showing ${visibleCount} of ${totalCards} dispensaries`;
+
+    if (visibleCount === 0) {
+      const input = document.getElementById('search-input') as HTMLInputElement;
+      noResultsQuery.textContent = input.value;
+      noResults.classList.remove('hidden');
+    } else {
+      noResults.classList.add('hidden');
+    }
+  }
+
+  function updateURL(query: string) {
+    const url = new URL(window.location.href);
+    if (query) {
+      url.searchParams.set('q', query);
+    } else {
+      url.searchParams.delete('q');
+    }
+    history.replaceState({ q: query }, '', url.toString());
+  }
+
+  function toggleClearButton(value: string) {
+    const clearBtn = document.getElementById('search-clear')!;
+    if (value) {
+      clearBtn.classList.remove('hidden');
+    } else {
+      clearBtn.classList.add('hidden');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('search-input') as HTMLInputElement;
+    const clearBtn = document.getElementById('search-clear')!;
+    const cards = document.querySelectorAll('[data-slug]');
+    totalCards = cards.length;
+
+    const debouncedSearch = debounce((_: unknown) => {
+      performSearch(input.value.trim());
+    }, 150);
+
+    input.addEventListener('input', () => {
+      toggleClearButton(input.value);
+      debouncedSearch(null);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      toggleClearButton('');
+      performSearch('');
+      input.focus();
+    });
+
+    window.addEventListener('popstate', (e: PopStateEvent) => {
+      const q = (e.state as { q?: string })?.q || '';
+      input.value = q;
+      toggleClearButton(q);
+      performSearch(q);
+    });
+
+    initSearch();
+  });
+</script>
