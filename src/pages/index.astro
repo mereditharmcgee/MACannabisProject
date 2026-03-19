@@ -29,7 +29,7 @@ const { totalLicenses, totalTowns } = statsData;
       <input
         type="search"
         id="search-input"
-        placeholder="Search by name, town, or owner"
+        placeholder="Search by name, town, zip, or owner"
         autocomplete="off"
         class="w-full pl-12 pr-12 py-4 text-lg rounded-xl border border-gray-300 shadow-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none"
       />
@@ -75,7 +75,7 @@ const { totalLicenses, totalTowns } = statsData;
     </div>
 
     <div id="no-results" class="hidden text-center py-12">
-      <p class="text-lg text-gray-500">No dispensaries match '<span id="no-results-query"></span>'. Try a different name, town, or owner.</p>
+      <p class="text-lg text-gray-500">No dispensaries match '<span id="no-results-query"></span>'. Try a different name, town, zip, or owner.</p>
     </div>
   </main>
 
@@ -94,6 +94,7 @@ const { totalLicenses, totalTowns } = statsData;
     tradeName: string;
     town: string;
     owner: string;
+    zip: string;
   }
 
   const FUSE_OPTIONS = {
@@ -101,8 +102,9 @@ const { totalLicenses, totalTowns } = statsData;
       { name: 'tradeName' as const, weight: 2 },
       { name: 'town' as const, weight: 1 },
       { name: 'owner' as const, weight: 1 },
+      { name: 'zip' as const, weight: 1 },
     ],
-    threshold: 0.3,
+    threshold: 0.2,
     ignoreLocation: true,
     minMatchCharLength: 1,
     shouldSort: true,

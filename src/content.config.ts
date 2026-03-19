@@ -13,6 +13,7 @@ const dispensaries = defineCollection({
     parentCompany: z.string().nullable().optional(),
     address: z.string().nullable().optional(),
     town: z.string().nullable().optional(),
+    zip: z.string().nullable().optional(),
     county: z.string().nullable().optional(),
     phone: z.string().nullable().optional(),
     licenseType: z.string().nullable().optional(),

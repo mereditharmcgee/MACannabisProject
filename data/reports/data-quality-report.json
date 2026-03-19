@@ -1,0 +1,487 @@
+{
+  "totalRecords": 525,
+  "issueCount": 118,
+  "needsNarrative": {
+    "count": 108,
+    "records": [
+      {
+        "licenseNumber": "MR282350",
+        "tradeName": "Triple M"
+      },
+      {
+        "licenseNumber": "MR282825",
+        "tradeName": "Bwell"
+      },
+      {
+        "licenseNumber": "MR282052",
+        "tradeName": "Curaleaf"
+      },
+      {
+        "licenseNumber": "MR283325",
+        "tradeName": "TERPS"
+      },
+      {
+        "licenseNumber": "MR282467",
+        "tradeName": "The Piping Plover"
+      },
+      {
+        "licenseNumber": "MR282969",
+        "tradeName": "Devine"
+      },
+      {
+        "licenseNumber": "MR281517",
+        "tradeName": "Calyx Berkshire"
+      },
+      {
+        "licenseNumber": "MR282318",
+        "tradeName": "Farnsworth Fine Cannabis Company"
+      },
+      {
+        "licenseNumber": "MR281549",
+        "tradeName": "Hi5"
+      },
+      {
+        "licenseNumber": "MR281402",
+        "tradeName": "Bloom Brothers"
+      },
+      {
+        "licenseNumber": "MR281951",
+        "tradeName": "Budhaus"
+      },
+      {
+        "licenseNumber": "MR282037",
+        "tradeName": "HiBrid"
+      },
+      {
+        "licenseNumber": "MR281588",
+        "tradeName": "Temescal Wellness"
+      },
+      {
+        "licenseNumber": "MR281967",
+        "tradeName": "The Pass"
+      },
+      {
+        "licenseNumber": "MR283141",
+        "tradeName": "TERPS"
+      },
+      {
+        "licenseNumber": "MR281332",
+        "tradeName": "Zahara"
+      },
+      {
+        "licenseNumber": "MR283027",
+        "tradeName": "The Agriculturalist"
+      },
+      {
+        "licenseNumber": "MR283075",
+        "tradeName": "Ascend"
+      },
+      {
+        "licenseNumber": "MD1282",
+        "tradeName": "Lucky Green Ladies"
+      },
+      {
+        "licenseNumber": "DO100103",
+        "tradeName": "Bracts & Pistils"
+      },
+      {
+        "licenseNumber": "MR282958",
+        "tradeName": "Greatest Hits"
+      },
+      {
+        "licenseNumber": "MR281754",
+        "tradeName": "Healthy Pharms (Temporarily Closed)"
+      },
+      {
+        "licenseNumber": "MR282578",
+        "tradeName": "Happy Valley"
+      },
+      {
+        "licenseNumber": "MR281811",
+        "tradeName": "Mello"
+      },
+      {
+        "licenseNumber": "MR283369",
+        "tradeName": "Diem"
+      },
+      {
+        "licenseNumber": "MD1301",
+        "tradeName": "On Root"
+      },
+      {
+        "licenseNumber": "DO100179",
+        "tradeName": "On Root"
+      },
+      {
+        "licenseNumber": "MD1262",
+        "tradeName": "Grassp Ventures"
+      },
+      {
+        "licenseNumber": "MR281844",
+        "tradeName": "Seagrass"
+      },
+      {
+        "licenseNumber": "MR282571",
+        "tradeName": "NESH"
+      },
+      {
+        "licenseNumber": "MR281245",
+        "tradeName": "Red Cardinal"
+      },
+      {
+        "licenseNumber": "MR285075",
+        "tradeName": "Altai"
+      },
+      {
+        "licenseNumber": "MR281835",
+        "tradeName": "Hi5"
+      },
+      {
+        "licenseNumber": "MD1271",
+        "tradeName": "Blossom Flower"
+      },
+      {
+        "licenseNumber": "MR284806",
+        "tradeName": "Dazed"
+      },
+      {
+        "licenseNumber": "MR284710",
+        "tradeName": "Canna Retreat"
+      },
+      {
+        "licenseNumber": "MR284652",
+        "tradeName": "EMBR"
+      },
+      {
+        "licenseNumber": "MR282714",
+        "tradeName": "Zaza Green"
+      },
+      {
+        "licenseNumber": "MR282975",
+        "tradeName": "Red Cardinal"
+      },
+      {
+        "licenseNumber": "MR281246",
+        "tradeName": "Fyre Ants"
+      },
+      {
+        "licenseNumber": "MR283970",
+        "tradeName": "Cannabis Culture"
+      },
+      {
+        "licenseNumber": "DO100155",
+        "tradeName": "SOCIAL-J LLC"
+      },
+      {
+        "licenseNumber": "MR282356",
+        "tradeName": "The Hempest"
+      },
+      {
+        "licenseNumber": "MR282925",
+        "tradeName": "Dreamer"
+      },
+      {
+        "licenseNumber": "MR284489",
+        "tradeName": "Canna Retreat"
+      },
+      {
+        "licenseNumber": "MR282183",
+        "tradeName": "Curaleaf"
+      },
+      {
+        "licenseNumber": "MD1306",
+        "tradeName": "Pineapple Express"
+      },
+      {
+        "licenseNumber": "MR284113",
+        "tradeName": "Blue River Terps"
+      },
+      {
+        "licenseNumber": "MR281353",
+        "tradeName": "High Profile X Budega"
+      },
+      {
+        "licenseNumber": "MR283416",
+        "tradeName": "Tree House Craft Cannabis"
+      },
+      {
+        "licenseNumber": "MR282033",
+        "tradeName": "Temescal Wellness"
+      },
+      {
+        "licenseNumber": "MR284689",
+        "tradeName": "Tree House Craft Cannabis"
+      },
+      {
+        "licenseNumber": "MR281800",
+        "tradeName": "Native Sun"
+      },
+      {
+        "licenseNumber": "RMD4128",
+        "tradeName": "Native Sun"
+      },
+      {
+        "licenseNumber": "MR281309",
+        "tradeName": "Temescal Wellness"
+      },
+      {
+        "licenseNumber": "MR284150",
+        "tradeName": "Hi5"
+      },
+      {
+        "licenseNumber": "MR282837",
+        "tradeName": "Ascend"
+      },
+      {
+        "licenseNumber": "MR282803",
+        "tradeName": "Redi"
+      },
+      {
+        "licenseNumber": "MR283367",
+        "tradeName": "Tree House Craft Cannabis"
+      },
+      {
+        "licenseNumber": "MR283714",
+        "tradeName": "BoomX Cannabis Co."
+      },
+      {
+        "licenseNumber": "MR284103",
+        "tradeName": "The Goods"
+      },
+      {
+        "licenseNumber": "MR284994",
+        "tradeName": "Smyth Cannabis Co"
+      },
+      {
+        "licenseNumber": "MR284969",
+        "tradeName": "House Premium Cannabis"
+      },
+      {
+        "licenseNumber": "MR283886",
+        "tradeName": "AYR"
+      },
+      {
+        "licenseNumber": "MR282766",
+        "tradeName": "Greatest Hits"
+      },
+      {
+        "licenseNumber": "MR285090",
+        "tradeName": "Elysian"
+      },
+      {
+        "licenseNumber": "MR284556",
+        "tradeName": "Quincy Cannabis Company"
+      },
+      {
+        "licenseNumber": "MR281552",
+        "tradeName": "ZenLeaf"
+      },
+      {
+        "licenseNumber": "MR282669",
+        "tradeName": "Botera"
+      },
+      {
+        "licenseNumber": "MR282460",
+        "tradeName": "Green4All"
+      },
+      {
+        "licenseNumber": "MR281374",
+        "tradeName": "Kush Groove"
+      },
+      {
+        "licenseNumber": "MR282881",
+        "tradeName": "South Shore Buds"
+      },
+      {
+        "licenseNumber": "MD1320",
+        "tradeName": "Gas Bus LLC"
+      },
+      {
+        "licenseNumber": "MD1265",
+        "tradeName": "Rolling Releaf"
+      },
+      {
+        "licenseNumber": "MR281290",
+        "tradeName": "Triple M"
+      },
+      {
+        "licenseNumber": "MR282232",
+        "tradeName": "ZenLeaf"
+      },
+      {
+        "licenseNumber": "MR283634",
+        "tradeName": "Apex Noire"
+      },
+      {
+        "licenseNumber": "MR282077",
+        "tradeName": "Ascend"
+      },
+      {
+        "licenseNumber": "MR283011",
+        "tradeName": "Boutiq"
+      },
+      {
+        "licenseNumber": "MR284117",
+        "tradeName": "East Boston Cannabis Co."
+      },
+      {
+        "licenseNumber": "MR283861",
+        "tradeName": "Happy Valley"
+      },
+      {
+        "licenseNumber": "MR284261",
+        "tradeName": "Rooted in Roxbury"
+      },
+      {
+        "licenseNumber": "MR281865",
+        "tradeName": "Seed"
+      },
+      {
+        "licenseNumber": "MD1260",
+        "tradeName": "Zyp Run"
+      },
+      {
+        "licenseNumber": "MR282590",
+        "tradeName": "Trinity Naturals"
+      },
+      {
+        "licenseNumber": "DO100105",
+        "tradeName": "Treevit, LLC"
+      },
+      {
+        "licenseNumber": "MR282757",
+        "tradeName": "TERPS"
+      },
+      {
+        "licenseNumber": "DO100127",
+        "tradeName": "Causeway"
+      },
+      {
+        "licenseNumber": "MD1303",
+        "tradeName": "Delivered, Inc."
+      },
+      {
+        "licenseNumber": "MR282670",
+        "tradeName": "New England Harvest"
+      },
+      {
+        "licenseNumber": "MR283264",
+        "tradeName": "Greatest Hits"
+      },
+      {
+        "licenseNumber": "MR284026",
+        "tradeName": "Joint Operations"
+      },
+      {
+        "licenseNumber": "MR281268",
+        "tradeName": "Cultivate"
+      },
+      {
+        "licenseNumber": "MR282984",
+        "tradeName": "Joint Operations"
+      },
+      {
+        "licenseNumber": "MR283073",
+        "tradeName": "Eskar"
+      },
+      {
+        "licenseNumber": "MR281263",
+        "tradeName": "Curaleaf"
+      },
+      {
+        "licenseNumber": "MR283652",
+        "tradeName": "Cady Brook Cannabis"
+      },
+      {
+        "licenseNumber": "MR282267",
+        "tradeName": "Blackstone Valley Cannabis"
+      },
+      {
+        "licenseNumber": "RMD3770",
+        "tradeName": "Blackstone Valley Cannabis"
+      },
+      {
+        "licenseNumber": "MR282424",
+        "tradeName": "Green N' Go"
+      },
+      {
+        "licenseNumber": "MR281782",
+        "tradeName": "Toy Town THC"
+      },
+      {
+        "licenseNumber": "MR282376",
+        "tradeName": "Diem"
+      },
+      {
+        "licenseNumber": "MR285223",
+        "tradeName": "JO Worcester - Joint Operations"
+      },
+      {
+        "licenseNumber": "MR281408",
+        "tradeName": "The Corner"
+      },
+      {
+        "licenseNumber": "DO100138",
+        "tradeName": "The Corner"
+      },
+      {
+        "licenseNumber": "MB281346",
+        "tradeName": "UPROOT LLC"
+      },
+      {
+        "licenseNumber": "MD1344",
+        "tradeName": "UPROOT LLC"
+      },
+      {
+        "licenseNumber": "DE201005",
+        "tradeName": "UPROOT LLC"
+      }
+    ]
+  },
+  "researchInconclusive": {
+    "count": 8,
+    "records": [
+      {
+        "licenseNumber": "MR284177",
+        "tradeName": "NATURAL AGRICULTURAL PRODUCTS, LLC"
+      },
+      {
+        "licenseNumber": "MR283784",
+        "tradeName": "LEAF RELIEF, INC."
+      },
+      {
+        "licenseNumber": "MR283012",
+        "tradeName": "THE HOLISTIC CONCEPTS, INC"
+      },
+      {
+        "licenseNumber": "MR284326",
+        "tradeName": "FLOWER & SOUL, INC."
+      },
+      {
+        "licenseNumber": "DO100113",
+        "tradeName": "ARTIS, LLC."
+      },
+      {
+        "licenseNumber": "MR284580",
+        "tradeName": "ROCKLAND OLD EXIT 14, INC."
+      },
+      {
+        "licenseNumber": "MR282482",
+        "tradeName": "NATURE MEDICINES, INC"
+      },
+      {
+        "licenseNumber": "MR284248",
+        "tradeName": "THE CANNABIS STATION"
+      }
+    ]
+  },
+  "missingFields": {
+    "phone": 0,
+    "address": 1,
+    "owner": 0,
+    "town": 1
+  },
+  "warnings": [
+    "Row 529: missing address"
+  ]
+}

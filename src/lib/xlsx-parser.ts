@@ -16,6 +16,7 @@ const headerMap: Record<string, string> = {
   'Legal Entity (MCC)': 'parentCompany',
   'Address': 'address',
   'Town': 'town',
+  'Zip': 'zip',
   'County': 'county',
   'Phone': 'phone',
   'Type': 'licenseType',
@@ -23,7 +24,7 @@ const headerMap: Record<string, string> = {
   'Ownership Details': 'ownershipDetails',
   'Special Status': 'specialStatus',
   // Unmapped columns present in XLSX but not in schema:
-  // 'Zip', 'Ownership Source', 'Latitude', 'Longitude'
+  // 'Ownership Source', 'Latitude', 'Longitude'
 };
 
 /**
@@ -142,6 +143,7 @@ export function parseDispensarySheet(workbook: ExcelJS.Workbook): ParseResult {
       parentCompany: rawData.parentCompany ?? null,
       address: rawData.address ?? null,
       town: rawData.town ?? null,
+      zip: rawData.zip ?? null,
       county: rawData.county ?? null,
       phone: rawData.phone ?? null,
       licenseType: rawData.licenseType ?? null,

@@ -7,6 +7,7 @@ export interface SearchRecord {
   tradeName: string;
   town: string;
   owner: string;
+  zip: string;
 }
 
 export const FUSE_OPTIONS: IFuseOptions<SearchRecord> = {
@@ -14,8 +15,9 @@ export const FUSE_OPTIONS: IFuseOptions<SearchRecord> = {
     { name: 'tradeName', weight: 2 },
     { name: 'town', weight: 1 },
     { name: 'owner', weight: 1 },
+    { name: 'zip', weight: 1 },
   ],
-  threshold: 0.3,
+  threshold: 0.2,
   ignoreLocation: true,
   minMatchCharLength: 1,
   shouldSort: true,
@@ -33,6 +35,7 @@ export function transformRecords(records: Array<Record<string, unknown>>): Searc
     owner: r.owner
       ? String(r.owner).replace(/\s*\(.*?\)\s*/g, '').trim()
       : '',
+    zip: r.zip ? String(r.zip) : '',
   }));
 }
 

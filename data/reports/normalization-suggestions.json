@@ -1,0 +1,317 @@
+[
+  {
+    "normalizedKey": "green gold group",
+    "field": "parentCompany",
+    "variants": [
+      "GREEN GOLD GROUP",
+      "GREEN GOLD GROUP, INC",
+      "GREEN GOLD GROUP, INC."
+    ],
+    "licenseNumbers": [
+      "MR284703",
+      "RMD3831",
+      "RMD4217",
+      "MR283723",
+      "MR281791"
+    ],
+    "recordCount": 5
+  },
+  {
+    "normalizedKey": "rosenfeld family (ellen, jon, marc rosenfeld)",
+    "field": "owner",
+    "variants": [
+      "Rosenfeld Family (Ellen, Jon, Marc Rosenfeld)",
+      "Rosenfeld family (Ellen, Jon, Marc Rosenfeld)"
+    ],
+    "licenseNumbers": [
+      "MR284925",
+      "MR283001",
+      "MR282205"
+    ],
+    "recordCount": 3
+  },
+  {
+    "normalizedKey": "curaleaf massachusetts",
+    "field": "parentCompany",
+    "variants": [
+      "CURALEAF MASSACHUSETTS INC",
+      "CURALEAF MASSACHUSETTS, INC"
+    ],
+    "licenseNumbers": [
+      "MR282052",
+      "MR282183",
+      "MR281263"
+    ],
+    "recordCount": 3
+  },
+  {
+    "normalizedKey": "theory wellness",
+    "field": "parentCompany",
+    "variants": [
+      "THEORY WELLNESS INC",
+      "THEORY WELLNESS INC."
+    ],
+    "licenseNumbers": [
+      "MR281549",
+      "MR281835",
+      "MR284150"
+    ],
+    "recordCount": 3
+  },
+  {
+    "normalizedKey": "evergreen strategies",
+    "field": "parentCompany",
+    "variants": [
+      "EVERGREEN STRATEGIES, LLC",
+      "EVERGREEN STRATEGIES, LLC."
+    ],
+    "licenseNumbers": [
+      "MR282032",
+      "MR283100",
+      "MR281834"
+    ],
+    "recordCount": 3
+  },
+  {
+    "normalizedKey": "berkshire roots",
+    "field": "parentCompany",
+    "variants": [
+      "BERKSHIRE ROOTS INC.",
+      "BERKSHIRE ROOTS, INC."
+    ],
+    "licenseNumbers": [
+      "MR281585",
+      "MR281845",
+      "RMD3480"
+    ],
+    "recordCount": 3
+  },
+  {
+    "normalizedKey": "green river cannabis",
+    "field": "parentCompany",
+    "variants": [
+      "GREEN RIVER CANNABIS COMPANY INC",
+      "GREEN RIVER CANNABIS COMPANY INC."
+    ],
+    "licenseNumbers": [
+      "MR283093",
+      "MR282175",
+      "MR283094"
+    ],
+    "recordCount": 3
+  },
+  {
+    "normalizedKey": "solar therapeutics",
+    "field": "parentCompany",
+    "variants": [
+      "SOLAR THERAPEUTICS",
+      "SOLAR THERAPEUTICS INC."
+    ],
+    "licenseNumbers": [
+      "MR282731",
+      "MR282948",
+      "MR281817"
+    ],
+    "recordCount": 3
+  },
+  {
+    "normalizedKey": "commcan",
+    "field": "parentCompany",
+    "variants": [
+      "COMMCAN, INC",
+      "COMMCAN, INC."
+    ],
+    "licenseNumbers": [
+      "MR284925",
+      "MR283001",
+      "MR282205"
+    ],
+    "recordCount": 3
+  },
+  {
+    "normalizedKey": "arl healthcare",
+    "field": "parentCompany",
+    "variants": [
+      "ARL HEALTHCARE INC.",
+      "ARL HEALTHCARE, INC."
+    ],
+    "licenseNumbers": [
+      "MR282334",
+      "MR284873",
+      "MR282382"
+    ],
+    "recordCount": 3
+  },
+  {
+    "normalizedKey": "holistic industries",
+    "field": "parentCompany",
+    "variants": [
+      "HOLISTIC INDUSTRIES, INC",
+      "HOLISTIC INDUSTRIES, INC."
+    ],
+    "licenseNumbers": [
+      "MR282667",
+      "MR282605",
+      "MR281787"
+    ],
+    "recordCount": 3
+  },
+  {
+    "normalizedKey": "sugarloaf cambridge cannabis",
+    "field": "parentCompany",
+    "variants": [
+      "SUGARLOAF CAMBRIDGE CANNABIS LLC",
+      "SUGARLOAF CAMBRIDGE CANNABIS, LLC"
+    ],
+    "licenseNumbers": [
+      "MR285089",
+      "DO100178",
+      "MR283726"
+    ],
+    "recordCount": 3
+  },
+  {
+    "normalizedKey": "pharmacannis massachusetts",
+    "field": "parentCompany",
+    "variants": [
+      "PHARMACANNIS MASSACHUSETTS INC.",
+      "PHARMACANNIS MASSACHUSETTS, INC."
+    ],
+    "licenseNumbers": [
+      "MR283436",
+      "MR281252",
+      "MR282298"
+    ],
+    "recordCount": 3
+  },
+  {
+    "normalizedKey": "in good health",
+    "field": "parentCompany",
+    "variants": [
+      "IN GOOD HEALTH",
+      "IN GOOD HEALTH INC."
+    ],
+    "licenseNumbers": [
+      "MR284655",
+      "MR282468"
+    ],
+    "recordCount": 2
+  },
+  {
+    "normalizedKey": "new england regional dispensary",
+    "field": "parentCompany",
+    "variants": [
+      "NEW ENGLAND REGIONAL DISPENSARY",
+      "NEW ENGLAND REGIONAL DISPENSARY, LLC"
+    ],
+    "licenseNumbers": [
+      "MR284607",
+      "MR285281"
+    ],
+    "recordCount": 2
+  },
+  {
+    "normalizedKey": "nova farms",
+    "field": "parentCompany",
+    "variants": [
+      "NOVA FARMS LLC",
+      "NOVA FARMS, LLC"
+    ],
+    "licenseNumbers": [
+      "MR281379",
+      "MR282516"
+    ],
+    "recordCount": 2
+  },
+  {
+    "normalizedKey": "berkley botanicals",
+    "field": "parentCompany",
+    "variants": [
+      "BERKLEY BOTANICALS LLC",
+      "BERKLEY BOTANICALS, LLC"
+    ],
+    "licenseNumbers": [
+      "MR281458",
+      "MR284877"
+    ],
+    "recordCount": 2
+  },
+  {
+    "normalizedKey": "northeast alternatives retail",
+    "field": "parentCompany",
+    "variants": [
+      "NORTHEAST ALTERNATIVES RETAIL LLC",
+      "NORTHEAST ALTERNATIVES RETAIL, LLC"
+    ],
+    "licenseNumbers": [
+      "MR282659",
+      "MR282743"
+    ],
+    "recordCount": 2
+  },
+  {
+    "normalizedKey": "ffd enterprises ma",
+    "field": "parentCompany",
+    "variants": [
+      "FFD ENTERPRISES MA",
+      "FFD ENTERPRISES MA, INC."
+    ],
+    "licenseNumbers": [
+      "MR281571",
+      "MR284920"
+    ],
+    "recordCount": 2
+  },
+  {
+    "normalizedKey": "enlite cannabis dispensary",
+    "field": "parentCompany",
+    "variants": [
+      "ENLITE CANNABIS DISPENSARY LLC",
+      "ENLITE CANNABIS DISPENSARY, LLC"
+    ],
+    "licenseNumbers": [
+      "MR284651",
+      "MR281867"
+    ],
+    "recordCount": 2
+  },
+  {
+    "normalizedKey": "native sun wellness",
+    "field": "parentCompany",
+    "variants": [
+      "NATIVE SUN WELLNESS INC",
+      "NATIVE SUN WELLNESS, INC."
+    ],
+    "licenseNumbers": [
+      "MR281800",
+      "RMD4128"
+    ],
+    "recordCount": 2
+  },
+  {
+    "normalizedKey": "alternative compassion services",
+    "field": "parentCompany",
+    "variants": [
+      "ALTERNATIVE COMPASSION SERVICES INC",
+      "ALTERNATIVE COMPASSION SERVICES, INC."
+    ],
+    "licenseNumbers": [
+      "MR284457",
+      "MR285029"
+    ],
+    "recordCount": 2
+  },
+  {
+    "normalizedKey": "local roots ne",
+    "field": "parentCompany",
+    "variants": [
+      "LOCAL ROOTS NE INC.",
+      "LOCAL ROOTS NE, INC."
+    ],
+    "licenseNumbers": [
+      "MR282131",
+      "MR283231"
+    ],
+    "recordCount": 2
+  }
+]
