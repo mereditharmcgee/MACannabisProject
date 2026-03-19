@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "npm run build:data && astro dev",
-    "build": "npm run build:data && astro build",
+    "build": "npm run build:data && npm run build:search && astro build",
     "build:data": "npx tsx scripts/build-data.ts",
+    "build:search": "npx tsx scripts/build-search-index.ts",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run --reporter=verbose",
@@ -16,10 +17,13 @@
     "node": ">=20"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.8",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.18.1",
     "exceljs": "^4.4.0",
-    "tailwindcss": "^4.2.1"
+    "fuse.js": "^7.1.0",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "tsx": "^4.21.0",
