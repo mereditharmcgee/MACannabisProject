@@ -95,12 +95,14 @@ const { totalLicenses, totalTowns } = statsData;
     town: string;
     owner: string;
     zip: string;
+    neighborhood: string;
   }
 
   const FUSE_OPTIONS = {
     keys: [
       { name: 'tradeName' as const, weight: 2 },
       { name: 'town' as const, weight: 1 },
+      { name: 'neighborhood' as const, weight: 1 },
       { name: 'owner' as const, weight: 1 },
       { name: 'zip' as const, weight: 1 },
     ],

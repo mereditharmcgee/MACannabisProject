@@ -60,10 +60,10 @@ const sampleRecords = [
 ];
 
 describe('transformRecords', () => {
-  it('produces records with only slug, tradeName, town, owner, zip fields', () => {
+  it('produces records with only slug, tradeName, town, owner, zip, neighborhood fields', () => {
     const result = transformRecords(sampleRecords);
     for (const record of result) {
-      expect(Object.keys(record).sort()).toEqual(['owner', 'slug', 'town', 'tradeName', 'zip']);
+      expect(Object.keys(record).sort()).toEqual(['neighborhood', 'owner', 'slug', 'town', 'tradeName', 'zip']);
     }
   });
 

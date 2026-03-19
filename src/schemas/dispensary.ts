@@ -35,6 +35,7 @@ export const dispensarySchema = z.object({
   address: z.string().nullable().optional(),
   town: z.string().nullable().optional(),
   zip: z.string().nullable().optional(),
+  neighborhood: z.string().nullable().optional(),
   county: z.string().nullable().optional(),
   phone: z.string().nullable().optional(),
   licenseType: z.string().nullable().optional(),

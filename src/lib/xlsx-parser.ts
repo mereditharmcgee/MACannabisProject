@@ -2,6 +2,7 @@ import ExcelJS from 'exceljs';
 import { dispensarySchema, specialStatusTags, statsSchema } from '../schemas/dispensary';
 import type { Dispensary, Stats } from '../schemas/dispensary';
 import { generateSlug, deduplicateSlugs } from './slugs';
+import { getNeighborhood } from './neighborhoods';
 
 // Re-export generateSlug for backward compatibility
 export { generateSlug } from './slugs';
@@ -144,6 +145,7 @@ export function parseDispensarySheet(workbook: ExcelJS.Workbook): ParseResult {
       address: rawData.address ?? null,
       town: rawData.town ?? null,
       zip: rawData.zip ?? null,
+      neighborhood: getNeighborhood(rawData.town ?? null, rawData.zip ?? null),
       county: rawData.county ?? null,
       phone: rawData.phone ?? null,
       licenseType: rawData.licenseType ?? null,
