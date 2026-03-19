@@ -12,10 +12,10 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **SRCH-01**: User can type a dispensary name into a search bar and see matching results instantly as they type (no submit button)
 - [x] **SRCH-02**: User can search by town name and see all dispensaries in that town
 - [x] **SRCH-03**: User can search by owner name and see all dispensaries they own
-- [ ] **SRCH-04**: User can tap ownership filter pills (Women-Owned, Black-Owned, Veteran-Owned, Social Equity, LGBTQ+-Owned) to filter the card grid
-- [ ] **SRCH-05**: User can combine multiple filter pills (e.g., Women-Owned + Independent) to narrow results
-- [ ] **SRCH-06**: User can toggle between Independent and MSO Corporate dispensaries
-- [ ] **SRCH-07**: User can filter dispensaries by county using a dropdown
+- [x] **SRCH-04**: User can tap ownership filter pills (Women-Owned, Black-Owned, Veteran-Owned, Social Equity, LGBTQ+-Owned) to filter the card grid
+- [x] **SRCH-05**: User can combine multiple filter pills (e.g., Women-Owned + Independent) to narrow results
+- [x] **SRCH-06**: User can toggle between Independent and MSO Corporate dispensaries
+- [x] **SRCH-07**: User can filter dispensaries by county using a dropdown
 - [x] **SRCH-08**: Search results display as cards showing dispensary name, town, owner, and ownership badge tags
 
 ### Detail Pages
@@ -88,10 +88,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SRCH-01 | Phase 5: Search System | Complete |
 | SRCH-02 | Phase 5: Search System | Complete |
 | SRCH-03 | Phase 5: Search System | Complete |
-| SRCH-04 | Phase 6: Filter System | Pending |
-| SRCH-05 | Phase 6: Filter System | Pending |
-| SRCH-06 | Phase 6: Filter System | Pending |
-| SRCH-07 | Phase 6: Filter System | Pending |
+| SRCH-04 | Phase 6: Filter System | Complete |
+| SRCH-05 | Phase 6: Filter System | Complete |
+| SRCH-06 | Phase 6: Filter System | Complete |
+| SRCH-07 | Phase 6: Filter System | Complete |
 | SRCH-08 | Phase 4: Homepage and Card Layout | Complete |
 | DETL-01 | Phase 3: Detail Pages | Complete |
 | DETL-02 | Phase 3: Detail Pages | Complete |

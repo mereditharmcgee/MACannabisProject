@@ -110,7 +110,7 @@ Plans:
   3. The MSO/Independent toggle is deferred (independent field has 0 populated records)
   4. The county dropdown filters dispensaries to only those in the selected county
   5. Filters compose with search (searching "Boston" then filtering "Social Equity" shows only Social Equity dispensaries in Boston results)
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 
 Plans:
 - [ ] 06-01-PLAN.md — Filter logic module (TDD) + filter UI integration in index.astro (Wave 1)
@@ -159,6 +159,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 3. Detail Pages | 3/3 | Complete    | 2026-03-18 |
 | 4. Homepage and Card Layout | 2/2 | Complete    | 2026-03-18 |
 | 5. Search System | 2/2 | Complete    | 2026-03-19 |
-| 6. Filter System | 0/2 | Not started | - |
+| 6. Filter System | 1/2 | In Progress|  |
 | 7. Trust and Legal | 0/TBD | Not started | - |
 | 8. Data Freshness and Launch Readiness | 0/TBD | Not started | - |
