@@ -11,6 +11,32 @@ const sorted = dispensaryEntries
 const statsEntries = await getCollection("stats");
 const statsData = statsEntries[0]?.data ?? { totalLicenses: 525, totalTowns: 156 };
 const { totalLicenses, totalTowns } = statsData;
+
+// Filter metadata computed at build time
+const filterTags = ['MTC Priority', 'Economic Empowerment', 'Social Equity'] as const;
+
+function slugifyTag(tag: string): string {
+  return tag.toLowerCase().replace(/\s+/g, '-');
+}
+
+function slugifyCounty(county: string): string {
+  return county.replace(' County', '').toLowerCase().replace(/\s+/g, '-');
+}
+
+// Count dispensaries per tag
+const tagCounts: Record<string, number> = {};
+for (const tag of filterTags) {
+  tagCounts[tag] = sorted.filter(d => d.specialStatusTags.includes(tag)).length;
+}
+
+// County list with counts
+const countyMap: Record<string, number> = {};
+for (const d of sorted) {
+  if (d.county) {
+    countyMap[d.county] = (countyMap[d.county] || 0) + 1;
+  }
+}
+const counties = Object.keys(countyMap).sort();
 ---
 
 <BaseLayout>
@@ -62,20 +88,49 @@ const { totalLicenses, totalTowns } = statsData;
   </section>
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <p id="result-count" class="text-sm text-gray-500 mb-4">Showing {sorted.length} of {sorted.length} dispensaries</p>
+    <div id="filter-bar" class="flex flex-wrap items-center gap-2 mb-4">
+      {filterTags.map((tag) => (
+        <button
+          type="button"
+          data-filter-tag={slugifyTag(tag)}
+          class="filter-pill border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer transition-colors"
+        >
+          {tag} <span class="pill-count">({tagCounts[tag]})</span>
+        </button>
+      ))}
+      <select id="county-filter" class="border border-gray-300 text-gray-700 bg-white rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none">
+        <option value="">All Counties ({sorted.filter(d => d.county).length})</option>
+        {counties.map((county) => (
+          <option value={slugifyCounty(county)}>
+            {county.replace(' County', '')} ({countyMap[county]})
+          </option>
+        ))}
+      </select>
+      <button
+        type="button"
+        id="clear-filters"
+        class="text-sm text-gray-500 hover:text-gray-700 underline hidden"
+      >
+        Clear all
+      </button>
+    </div>
 
-    <!-- Phase 6: filter pills go here -->
+    <p id="result-count" class="text-sm text-gray-500 mb-4">Showing {sorted.length} of {sorted.length} dispensaries</p>
 
     <div id="dispensary-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {sorted.map((dispensary) => (
-        <div data-slug={dispensary.slug}>
+        <div
+          data-slug={dispensary.slug}
+          data-tags={dispensary.specialStatusTags.map(t => t.toLowerCase().replace(/\s+/g, '-')).join(',')}
+          data-county={dispensary.county?.replace(' County', '').toLowerCase().replace(/\s+/g, '-') || ''}
+        >
           <DispensaryGridCard dispensary={dispensary} />
         </div>
       ))}
     </div>
 
     <div id="no-results" class="hidden text-center py-12">
-      <p class="text-lg text-gray-500">No dispensaries match '<span id="no-results-query"></span>'. Try a different name, town, zip, or owner.</p>
+      <p id="no-results-message" class="text-lg text-gray-500">No dispensaries match '<span id="no-results-query"></span>'. Try a different name, town, zip, or owner.</p>
     </div>
   </main>
 
@@ -88,6 +143,14 @@ const { totalLicenses, totalTowns } = statsData;
 
 <script>
   import Fuse from 'fuse.js';
+  import {
+    computeTagSlugs,
+    computeCountySlugs,
+    computeVisibleSlugs,
+    computeTagCounts,
+    computeCountyCounts,
+    intersectSets,
+  } from '../lib/filter-logic';
 
   interface SearchRecord {
     slug: string;
@@ -112,14 +175,40 @@ const { totalLicenses, totalTowns } = statsData;
     shouldSort: true,
   };
 
-  // State: null = show all, Set = show only matching slugs
+  // Pill active colors (match OwnershipBadge for visual consistency)
+  const PILL_ACTIVE_COLORS: Record<string, string> = {
+    'mtc-priority': 'bg-amber-100 text-amber-800 border-amber-300',
+    'economic-empowerment': 'bg-purple-100 text-purple-800 border-purple-300',
+    'social-equity': 'bg-blue-100 text-blue-800 border-blue-300',
+  };
+  const PILL_INACTIVE = 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50';
+
+  // Tag display names keyed by slug
+  const TAG_DISPLAY: Record<string, string> = {
+    'mtc-priority': 'MTC Priority',
+    'economic-empowerment': 'Economic Empowerment',
+    'social-equity': 'Social Equity',
+  };
+  const FILTER_TAG_SLUGS = Object.keys(TAG_DISPLAY);
+
+  // Search state
   let searchMatchSlugs: Set<string> | null = null;
   let fuse: Fuse<SearchRecord> | null = null;
   let totalCards = 0;
 
+  // Filter state
+  let activeTags: Set<string> = new Set();
+  let activeCounty: string = '';
+  let slugToTags: Map<string, string[]> = new Map();
+  let slugToCounty: Map<string, string> = new Map();
+
   function debounce<T extends (...args: unknown[]) => void>(fn: T, ms: number): T {
     let id: ReturnType<typeof setTimeout>;
     return ((...args: unknown[]) => { clearTimeout(id); id = setTimeout(() => fn(...args), ms); }) as T;
+  }
+
+  function hasActiveFilters(): boolean {
+    return activeTags.size > 0 || activeCounty !== '';
   }
 
   async function initSearch() {
@@ -134,22 +223,54 @@ const { totalLicenses, totalTowns } = statsData;
     const parsedIndex = Fuse.parseIndex<SearchRecord>(indexData);
     fuse = new Fuse<SearchRecord>(searchData, FUSE_OPTIONS, parsedIndex);
 
-    // Check for ?q= in URL
+    // Restore URL state
     const params = new URLSearchParams(window.location.search);
     const q = params.get('q');
     if (q) {
       const input = document.getElementById('search-input') as HTMLInputElement;
       input.value = q;
       toggleClearButton(q);
-      performSearch(q);
+      // Perform search without calling applyVisibility yet
+      const results = fuse.search(q);
+      searchMatchSlugs = new Set(results.map(r => r.item.slug));
     }
+
+    // Restore filter state from URL
+    initFilters(params);
+
+    // Now apply everything
+    applyVisibility();
+    updateFilterCounts();
+  }
+
+  function initFilters(params: URLSearchParams) {
+    const tagsParam = params.get('tags');
+    if (tagsParam) {
+      const tagSlugs = tagsParam.split(',').filter(t => t);
+      for (const ts of tagSlugs) {
+        if (TAG_DISPLAY[ts]) {
+          activeTags.add(TAG_DISPLAY[ts]);
+          setPillActive(ts, true);
+        }
+      }
+    }
+
+    const countyParam = params.get('county');
+    if (countyParam) {
+      activeCounty = countyParam;
+      const select = document.getElementById('county-filter') as HTMLSelectElement;
+      select.value = countyParam;
+    }
+
+    toggleClearFiltersButton();
   }
 
   function performSearch(query: string) {
     if (!query.trim()) {
       searchMatchSlugs = null;
       applyVisibility();
-      updateURL('');
+      updateFilterCounts();
+      updateURL();
       return;
     }
 
@@ -158,7 +279,8 @@ const { totalLicenses, totalTowns } = statsData;
     const results = fuse.search(query);
     searchMatchSlugs = new Set(results.map(r => r.item.slug));
     applyVisibility();
-    updateURL(query);
+    updateFilterCounts();
+    updateURL();
   }
 
   function applyVisibility() {
@@ -166,9 +288,14 @@ const { totalLicenses, totalTowns } = statsData;
     const cards = grid.querySelectorAll<HTMLElement>('[data-slug]');
     const resultCount = document.getElementById('result-count')!;
     const noResults = document.getElementById('no-results')!;
-    const noResultsQuery = document.getElementById('no-results-query')!;
+    const noResultsMessage = document.getElementById('no-results-message')!;
 
-    if (searchMatchSlugs === null) {
+    // Compute filter dimensions
+    const tagSlugs = computeTagSlugs(activeTags, slugToTags);
+    const countySlugs = computeCountySlugs(activeCounty, slugToCounty);
+    const visibleSet = computeVisibleSlugs(searchMatchSlugs, tagSlugs, countySlugs);
+
+    if (visibleSet === null) {
       // Show all, restore alphabetical order
       const fragment = document.createDocumentFragment();
       const sorted = Array.from(cards).sort((a, b) => {
@@ -186,24 +313,42 @@ const { totalLicenses, totalTowns } = statsData;
       return;
     }
 
-    // Relevance ordering: matching cards first in result order, then hidden cards
+    // Determine ordering: relevance if search active, alphabetical otherwise
+    const useRelevanceOrder = searchMatchSlugs !== null;
     const fragment = document.createDocumentFragment();
     const matchMap = new Map<string, HTMLElement>();
     const nonMatch: HTMLElement[] = [];
 
     for (const card of cards) {
       const slug = card.getAttribute('data-slug') || '';
-      if (searchMatchSlugs.has(slug)) {
+      if (visibleSet.has(slug)) {
         matchMap.set(slug, card);
       } else {
         nonMatch.push(card);
       }
     }
 
-    // Append matches in result order (Set preserves insertion order)
-    for (const slug of searchMatchSlugs) {
-      const card = matchMap.get(slug);
-      if (card) {
+    if (useRelevanceOrder && searchMatchSlugs) {
+      // Append in search result order (preserves relevance)
+      for (const slug of searchMatchSlugs) {
+        const card = matchMap.get(slug);
+        if (card) {
+          card.style.display = '';
+          fragment.appendChild(card);
+          matchMap.delete(slug);
+        }
+      }
+      // Any remaining visible cards (matched by filters but not in search relevance order)
+      for (const card of matchMap.values()) {
+        card.style.display = '';
+        fragment.appendChild(card);
+      }
+    } else {
+      // Alphabetical order among visible cards
+      const visibleCards = Array.from(matchMap.entries())
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([, card]) => card);
+      for (const card of visibleCards) {
         card.style.display = '';
         fragment.appendChild(card);
       }
@@ -217,26 +362,134 @@ const { totalLicenses, totalTowns } = statsData;
 
     grid.appendChild(fragment);
 
-    const visibleCount = searchMatchSlugs.size;
+    const visibleCount = visibleSet.size;
     resultCount.textContent = `Showing ${visibleCount} of ${totalCards} dispensaries`;
 
     if (visibleCount === 0) {
-      const input = document.getElementById('search-input') as HTMLInputElement;
-      noResultsQuery.textContent = input.value;
+      if (hasActiveFilters() && searchMatchSlugs !== null) {
+        noResultsMessage.textContent = 'No dispensaries match your current search and filters.';
+      } else if (hasActiveFilters()) {
+        noResultsMessage.textContent = 'No dispensaries match your current filters.';
+      } else {
+        const input = document.getElementById('search-input') as HTMLInputElement;
+        noResultsMessage.innerHTML = `No dispensaries match '<span id="no-results-query">${input.value}</span>'. Try a different name, town, zip, or owner.`;
+      }
       noResults.classList.remove('hidden');
     } else {
       noResults.classList.add('hidden');
     }
   }
 
-  function updateURL(query: string) {
+  function updateFilterCounts() {
+    // For tag pill counts: base = intersection of search + county (exclude tag filter)
+    const countySlugs = computeCountySlugs(activeCounty, slugToCounty);
+    const tagBase = intersectSets(searchMatchSlugs, countySlugs);
+    const tagDisplayNames = FILTER_TAG_SLUGS.map(s => TAG_DISPLAY[s]);
+    const tagCounts = computeTagCounts(slugToTags, tagBase, tagDisplayNames);
+
+    // Update pill count spans
+    const pills = document.querySelectorAll<HTMLElement>('[data-filter-tag]');
+    for (const pill of pills) {
+      const tagSlug = pill.getAttribute('data-filter-tag')!;
+      const tagName = TAG_DISPLAY[tagSlug];
+      const count = tagCounts.get(tagName) ?? 0;
+      const countSpan = pill.querySelector('.pill-count');
+      if (countSpan) {
+        countSpan.textContent = `(${count})`;
+      }
+    }
+
+    // For county option counts: base = intersection of search + tags (exclude county filter)
+    const tagSlugs = computeTagSlugs(activeTags, slugToTags);
+    const countyBase = intersectSets(searchMatchSlugs, tagSlugs);
+
+    const select = document.getElementById('county-filter') as HTMLSelectElement;
+    const options = select.querySelectorAll('option');
+
+    // Build county counts
+    const countyNames: string[] = [];
+    for (let i = 1; i < options.length; i++) {
+      countyNames.push(options[i].value);
+    }
+    const countyCounts = computeCountyCounts(slugToCounty, countyBase, countyNames);
+
+    // Update "All Counties" count
+    let allCount = 0;
+    if (countyBase === null) {
+      allCount = totalCards;
+    } else {
+      // Count unique slugs that have a county in the base
+      for (const [slug] of slugToCounty) {
+        if (countyBase.has(slug)) allCount++;
+      }
+    }
+    options[0].textContent = `All Counties (${allCount})`;
+
+    // Update individual county options
+    for (let i = 1; i < options.length; i++) {
+      const countySlug = options[i].value;
+      const count = countyCounts.get(countySlug) ?? 0;
+      // Extract display name from slug
+      const displayName = countySlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      options[i].textContent = `${displayName} (${count})`;
+    }
+  }
+
+  function setPillActive(tagSlug: string, active: boolean) {
+    const pill = document.querySelector(`[data-filter-tag="${tagSlug}"]`) as HTMLElement;
+    if (!pill) return;
+
+    const inactiveClasses = PILL_INACTIVE.split(' ');
+    const activeClasses = (PILL_ACTIVE_COLORS[tagSlug] || '').split(' ');
+
+    if (active) {
+      for (const c of inactiveClasses) pill.classList.remove(c);
+      for (const c of activeClasses) pill.classList.add(c);
+    } else {
+      for (const c of activeClasses) pill.classList.remove(c);
+      for (const c of inactiveClasses) pill.classList.add(c);
+    }
+  }
+
+  function toggleClearFiltersButton() {
+    const btn = document.getElementById('clear-filters')!;
+    if (hasActiveFilters()) {
+      btn.classList.remove('hidden');
+    } else {
+      btn.classList.add('hidden');
+    }
+  }
+
+  function updateURL() {
     const url = new URL(window.location.href);
+    const input = document.getElementById('search-input') as HTMLInputElement;
+    const query = input.value.trim();
+
     if (query) {
       url.searchParams.set('q', query);
     } else {
       url.searchParams.delete('q');
     }
-    history.replaceState({ q: query }, '', url.toString());
+
+    if (activeTags.size > 0) {
+      const tagSlugs = Array.from(activeTags).map(t => t.toLowerCase().replace(/\s+/g, '-'));
+      url.searchParams.set('tags', tagSlugs.join(','));
+    } else {
+      url.searchParams.delete('tags');
+    }
+
+    if (activeCounty) {
+      url.searchParams.set('county', activeCounty);
+    } else {
+      url.searchParams.delete('county');
+    }
+
+    const state = {
+      q: query,
+      tags: Array.from(activeTags),
+      county: activeCounty,
+    };
+    history.pushState(state, '', url.toString());
   }
 
   function toggleClearButton(value: string) {
@@ -251,9 +504,32 @@ const { totalLicenses, totalTowns } = statsData;
   document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('search-input') as HTMLInputElement;
     const clearBtn = document.getElementById('search-clear')!;
-    const cards = document.querySelectorAll('[data-slug]');
+    const cards = document.querySelectorAll<HTMLElement>('[data-slug]');
     totalCards = cards.length;
 
+    // Build slug-to-tags and slug-to-county maps from DOM
+    for (const card of cards) {
+      const slug = card.getAttribute('data-slug') || '';
+      const tagsStr = card.getAttribute('data-tags') || '';
+      const county = card.getAttribute('data-county') || '';
+
+      if (tagsStr) {
+        // Convert slugified tags back to display names
+        const tagSlugs = tagsStr.split(',').filter(t => t);
+        const tagNames = tagSlugs
+          .map(ts => TAG_DISPLAY[ts])
+          .filter((t): t is string => !!t);
+        if (tagNames.length > 0) {
+          slugToTags.set(slug, tagNames);
+        }
+      }
+
+      if (county) {
+        slugToCounty.set(slug, county);
+      }
+    }
+
+    // Search handlers
     const debouncedSearch = debounce((_: unknown) => {
       performSearch(input.value.trim());
     }, 150);
@@ -270,11 +546,92 @@ const { totalLicenses, totalTowns } = statsData;
       input.focus();
     });
 
+    // Filter pill click handlers
+    const pills = document.querySelectorAll<HTMLElement>('[data-filter-tag]');
+    for (const pill of pills) {
+      pill.addEventListener('click', () => {
+        const tagSlug = pill.getAttribute('data-filter-tag')!;
+        const tagName = TAG_DISPLAY[tagSlug];
+        if (!tagName) return;
+
+        if (activeTags.has(tagName)) {
+          activeTags.delete(tagName);
+          setPillActive(tagSlug, false);
+        } else {
+          activeTags.add(tagName);
+          setPillActive(tagSlug, true);
+        }
+
+        toggleClearFiltersButton();
+        applyVisibility();
+        updateFilterCounts();
+        updateURL();
+      });
+    }
+
+    // County dropdown handler
+    const countySelect = document.getElementById('county-filter') as HTMLSelectElement;
+    countySelect.addEventListener('change', () => {
+      activeCounty = countySelect.value;
+      toggleClearFiltersButton();
+      applyVisibility();
+      updateFilterCounts();
+      updateURL();
+    });
+
+    // Clear all filters button
+    const clearFiltersBtn = document.getElementById('clear-filters')!;
+    clearFiltersBtn.addEventListener('click', () => {
+      activeTags.clear();
+      activeCounty = '';
+      countySelect.value = '';
+
+      // Reset all pill styles
+      for (const pill of pills) {
+        const tagSlug = pill.getAttribute('data-filter-tag')!;
+        setPillActive(tagSlug, false);
+      }
+
+      toggleClearFiltersButton();
+      applyVisibility();
+      updateFilterCounts();
+      updateURL();
+    });
+
+    // Popstate handler (back/forward)
     window.addEventListener('popstate', (e: PopStateEvent) => {
-      const q = (e.state as { q?: string })?.q || '';
+      const state = e.state as { q?: string; tags?: string[]; county?: string } | null;
+      const q = state?.q || '';
+      const tags = state?.tags || [];
+      const county = state?.county || '';
+
+      // Restore search
       input.value = q;
       toggleClearButton(q);
-      performSearch(q);
+      if (q && fuse) {
+        const results = fuse.search(q);
+        searchMatchSlugs = new Set(results.map(r => r.item.slug));
+      } else {
+        searchMatchSlugs = null;
+      }
+
+      // Restore tag filters
+      activeTags.clear();
+      for (const pill of pills) {
+        const tagSlug = pill.getAttribute('data-filter-tag')!;
+        const tagName = TAG_DISPLAY[tagSlug];
+        const isActive = tags.includes(tagName);
+        if (isActive) activeTags.add(tagName);
+        setPillActive(tagSlug, isActive);
+      }
+
+      // Restore county filter
+      activeCounty = county;
+      countySelect.value = county;
+
+      toggleClearFiltersButton();
+      applyVisibility();
+      updateFilterCounts();
     });
 
     initSearch();
