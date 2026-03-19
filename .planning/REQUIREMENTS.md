@@ -9,9 +9,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Search & Discovery
 
-- [ ] **SRCH-01**: User can type a dispensary name into a search bar and see matching results instantly as they type (no submit button)
-- [ ] **SRCH-02**: User can search by town name and see all dispensaries in that town
-- [ ] **SRCH-03**: User can search by owner name and see all dispensaries they own
+- [x] **SRCH-01**: User can type a dispensary name into a search bar and see matching results instantly as they type (no submit button)
+- [x] **SRCH-02**: User can search by town name and see all dispensaries in that town
+- [x] **SRCH-03**: User can search by owner name and see all dispensaries they own
 - [ ] **SRCH-04**: User can tap ownership filter pills (Women-Owned, Black-Owned, Veteran-Owned, Social Equity, LGBTQ+-Owned) to filter the card grid
 - [ ] **SRCH-05**: User can combine multiple filter pills (e.g., Women-Owned + Independent) to narrow results
 - [ ] **SRCH-06**: User can toggle between Independent and MSO Corporate dispensaries
@@ -32,7 +32,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **DATA-01**: Spreadsheet (CSV) is transformed into structured JSON data at build time with schema validation
 - [x] **DATA-02**: Build fails if data has missing required fields or invalid values (no silent failures)
-- [ ] **DATA-03**: Search index is pre-built at build time and served as static JSON
+- [x] **DATA-03**: Search index is pre-built at build time and served as static JSON
 - [ ] **DATA-04**: Monthly update workflow is documented: update CSV, push to git, site auto-rebuilds
 
 ### Trust & Legal
@@ -85,9 +85,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SRCH-01 | Phase 5: Search System | Pending |
-| SRCH-02 | Phase 5: Search System | Pending |
-| SRCH-03 | Phase 5: Search System | Pending |
+| SRCH-01 | Phase 5: Search System | Complete |
+| SRCH-02 | Phase 5: Search System | Complete |
+| SRCH-03 | Phase 5: Search System | Complete |
 | SRCH-04 | Phase 6: Filter System | Pending |
 | SRCH-05 | Phase 6: Filter System | Pending |
 | SRCH-06 | Phase 6: Filter System | Pending |
@@ -102,7 +102,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DETL-07 | Phase 3: Detail Pages | Complete |
 | DATA-01 | Phase 2: Data Pipeline | Complete |
 | DATA-02 | Phase 2: Data Pipeline | Complete |
-| DATA-03 | Phase 5: Search System | Pending |
+| DATA-03 | Phase 5: Search System | Complete |
 | DATA-04 | Phase 8: Data Freshness and Launch Readiness | Pending |
 | TRST-01 | Phase 7: Trust and Legal | Pending |
 | TRST-02 | Phase 7: Trust and Legal | Pending |
