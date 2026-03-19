@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Detail Pages** - 525 pre-rendered dispensary pages with SEO-friendly URLs, structured data, and ownership narratives (completed 2026-03-18)
 - [x] **Phase 4: Homepage and Card Layout** - Responsive homepage with hero section, stats banner, and browsable card grid (completed 2026-03-18)
 - [x] **Phase 5: Search System** - Instant typeahead search across dispensary names, towns, and owners with pre-built Fuse.js index (completed 2026-03-19)
-- [ ] **Phase 6: Filter System** - Ownership badge filter pills, MSO/Independent toggle, and county dropdown operating on the card grid
+- [ ] **Phase 6: Filter System** - Ownership tag filter pills, county dropdown, composing with search (MSO/Independent toggle deferred)
 - [ ] **Phase 7: Trust and Legal** - Correction form, data disclaimer, last-verified dates, and Terms of Service
 - [ ] **Phase 8: Data Freshness and Launch Readiness** - Monthly update workflow, performance optimization, and launch checklist completion
 
@@ -101,20 +101,20 @@ Plans:
 - [x] 05-02-PLAN.md — Visual and functional verification checkpoint (Wave 2) (completed 2026-03-19)
 
 ### Phase 6: Filter System
-**Goal**: Users can narrow the dispensary grid by ownership characteristics, corporate vs. independent status, and geographic location using visual filter controls
+**Goal**: Users can narrow the dispensary grid by ownership tags and county using visual filter controls that compose with existing search
 **Depends on**: Phase 5
 **Requirements**: SRCH-04, SRCH-05, SRCH-06, SRCH-07
 **Success Criteria** (what must be TRUE):
-  1. Tapping an ownership filter pill (Women-Owned, Black-Owned, Veteran-Owned, Social Equity, LGBTQ+-Owned) immediately filters the visible card grid
-  2. Multiple filter pills can be active simultaneously (e.g., Women-Owned + Independent) and results reflect the intersection
-  3. The MSO Corporate vs. Independent toggle filters the grid to show only matching dispensaries
+  1. Tapping an ownership filter pill (MTC Priority, Economic Empowerment, Social Equity) immediately filters the visible card grid
+  2. Multiple filter pills can be active simultaneously and results reflect the OR union
+  3. The MSO/Independent toggle is deferred (independent field has 0 populated records)
   4. The county dropdown filters dispensaries to only those in the selected county
-  5. Filters compose with search (searching "Boston" then filtering "Women-Owned" shows only women-owned dispensaries in Boston results)
-**Plans**: TBD
+  5. Filters compose with search (searching "Boston" then filtering "Social Equity" shows only Social Equity dispensaries in Boston results)
+**Plans:** 2 plans
 
 Plans:
-- [ ] 06-01: TBD
-- [ ] 06-02: TBD
+- [ ] 06-01-PLAN.md — Filter logic module (TDD) + filter UI integration in index.astro (Wave 1)
+- [ ] 06-02-PLAN.md — Visual and functional verification checkpoint (Wave 2)
 
 ### Phase 7: Trust and Legal
 **Goal**: Every listing has a correction mechanism and the site communicates data accuracy context, protecting both users and the publisher
@@ -159,6 +159,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 3. Detail Pages | 3/3 | Complete    | 2026-03-18 |
 | 4. Homepage and Card Layout | 2/2 | Complete    | 2026-03-18 |
 | 5. Search System | 2/2 | Complete    | 2026-03-19 |
-| 6. Filter System | 0/TBD | Not started | - |
+| 6. Filter System | 0/2 | Not started | - |
 | 7. Trust and Legal | 0/TBD | Not started | - |
 | 8. Data Freshness and Launch Readiness | 0/TBD | Not started | - |
