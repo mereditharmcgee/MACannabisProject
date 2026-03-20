@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Detail Pages** - 525 pre-rendered dispensary pages with SEO-friendly URLs, structured data, and ownership narratives (completed 2026-03-18)
 - [x] **Phase 4: Homepage and Card Layout** - Responsive homepage with hero section, stats banner, and browsable card grid (completed 2026-03-18)
 - [x] **Phase 5: Search System** - Instant typeahead search across dispensary names, towns, and owners with pre-built Fuse.js index (completed 2026-03-19)
-- [ ] **Phase 6: Filter System** - Ownership tag filter pills, county dropdown, composing with search (MSO/Independent toggle deferred)
+- [x] **Phase 6: Filter System** - Ownership tag filter pills, county dropdown, composing with search (MSO/Independent toggle deferred) (completed 2026-03-20)
 - [ ] **Phase 7: Trust and Legal** - Correction form, data disclaimer, last-verified dates, and Terms of Service
 - [ ] **Phase 8: Data Freshness and Launch Readiness** - Monthly update workflow, performance optimization, and launch checklist completion
 
@@ -110,7 +110,7 @@ Plans:
   3. The MSO/Independent toggle is deferred (independent field has 0 populated records)
   4. The county dropdown filters dispensaries to only those in the selected county
   5. Filters compose with search (searching "Boston" then filtering "Social Equity" shows only Social Equity dispensaries in Boston results)
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [ ] 06-01-PLAN.md — Filter logic module (TDD) + filter UI integration in index.astro (Wave 1)
@@ -159,6 +159,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 3. Detail Pages | 3/3 | Complete    | 2026-03-18 |
 | 4. Homepage and Card Layout | 2/2 | Complete    | 2026-03-18 |
 | 5. Search System | 2/2 | Complete    | 2026-03-19 |
-| 6. Filter System | 1/2 | In Progress|  |
+| 6. Filter System | 2/2 | Complete   | 2026-03-20 |
 | 7. Trust and Legal | 0/TBD | Not started | - |
 | 8. Data Freshness and Launch Readiness | 0/TBD | Not started | - |
