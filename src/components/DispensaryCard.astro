@@ -55,11 +55,11 @@ const showParentCompany =
   ownerDisplay &&
   dispensary.parentCompany.toLowerCase() !== ownerDisplay.toLowerCase();
 
-// Correction form URL with pre-filled dispensary name
-// Replace FORM_ID_PLACEHOLDER and FIELD_ID_PLACEHOLDER with actual Google Form IDs after form creation.
-const CORRECTION_FORM_BASE = 'https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/viewform';
-const DISPENSARY_NAME_ENTRY = 'entry.FIELD_ID_PLACEHOLDER';
-const correctionFormUrl = `${CORRECTION_FORM_BASE}?${DISPENSARY_NAME_ENTRY}=${encodeURIComponent(dispensary.tradeName)}&embedded=true`;
+// Correction form via Formspree
+// Replace with your Formspree form ID after creating a form at https://formspree.io
+// Free tier: 50 submissions/month. Submissions go to your email.
+const FORMSPREE_FORM_ID = 'FORMSPREE_ID_PLACEHOLDER';
+const FORMSPREE_URL = `https://formspree.io/f/${FORMSPREE_FORM_ID}`;
 ---
 
 <a href="/" class="inline-block mb-4 text-green-700 hover:underline text-sm">&larr; Back to Directory</a>
@@ -168,17 +168,59 @@ const correctionFormUrl = `${CORRECTION_FORM_BASE}?${DISPENSARY_NAME_ENTRY}=${en
     <section id="correction-form" class="mt-6 border-t border-gray-100 pt-6">
       <h2 class="text-lg font-semibold text-gray-900 mb-3">Suggest a Correction</h2>
       <p class="text-sm text-gray-500 mb-3">See something wrong with this listing? Let us know and we'll update it.</p>
-      <iframe
-        src={correctionFormUrl}
-        width="100%"
-        height="660"
-        frameborder="0"
-        marginheight="0"
-        marginwidth="0"
-        title={`Suggest a correction for ${dispensary.tradeName}`}
-        loading="lazy"
-        class="rounded-lg border border-gray-200"
-      >Loading correction form...</iframe>
+      <form
+        action={FORMSPREE_URL}
+        method="POST"
+        class="space-y-4"
+        id="correction-form-el"
+      >
+        <input type="hidden" name="dispensary" value={dispensary.tradeName} />
+        <div>
+          <label for="correction-field" class="block text-sm font-medium text-gray-700 mb-1">What needs correcting?</label>
+          <select
+            id="correction-field"
+            name="field"
+            required
+            class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none"
+          >
+            <option value="">Select a field...</option>
+            <option value="owner">Owner</option>
+            <option value="address">Address</option>
+            <option value="phone">Phone Number</option>
+            <option value="license-type">License Type</option>
+            <option value="ownership-tags">Ownership Tags</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="correction-value" class="block text-sm font-medium text-gray-700 mb-1">Correct information</label>
+          <textarea
+            id="correction-value"
+            name="correction"
+            required
+            rows="3"
+            placeholder="What should it say instead?"
+            class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none resize-y"
+          ></textarea>
+        </div>
+        <div>
+          <label for="correction-email" class="block text-sm font-medium text-gray-700 mb-1">Your email <span class="text-gray-400 font-normal">(optional, for follow-up)</span></label>
+          <input
+            type="email"
+            id="correction-email"
+            name="email"
+            placeholder="you@example.com"
+            class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full sm:w-auto px-6 py-2.5 bg-green-700 text-white text-sm font-medium rounded-lg hover:bg-green-800 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors"
+        >
+          Submit Correction
+        </button>
+        <div id="correction-status" class="hidden text-sm"></div>
+      </form>
     </section>
 
     {/* Terms of Service Link */}
