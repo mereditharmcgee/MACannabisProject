@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import DispensaryGridCard from "../components/DispensaryGridCard.astro";
+import DataDisclaimer from "../components/DataDisclaimer.astro";
 import { getCollection } from "astro:content";
 
 const dispensaryEntries = await getCollection("dispensaries");
@@ -134,10 +135,10 @@ const counties = Object.keys(countyMap).sort();
     </div>
   </main>
 
-  <footer class="max-w-7xl mx-auto px-4 py-8 border-t border-gray-200 text-center">
+  <footer class="max-w-7xl mx-auto px-4 py-8 border-t border-gray-200 text-center space-y-4">
+    <DataDisclaimer variant="brief" />
     <p class="text-sm text-gray-500">A project by Meredith McGee</p>
-    <p class="text-xs text-gray-400 mt-1">Data sourced from Massachusetts Cannabis Control Commission public records.</p>
-    <!-- Phase 7: Terms of Service link goes here -->
+    <a href="/terms/" class="text-xs text-gray-400 hover:text-gray-600 underline">Terms of Service</a>
   </footer>
 </BaseLayout>
 

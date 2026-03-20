@@ -1,0 +1,27 @@
+---
+interface Props {
+  variant: 'brief' | 'detailed';
+}
+
+const { variant } = Astro.props;
+---
+
+{variant === 'brief' ? (
+  <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-800">
+    <p>
+      Data sourced from Massachusetts Cannabis Control Commission (MCC) public records and may not reflect recent changes.
+      See something wrong? Suggest a correction on any listing.
+      <a href="/terms/" class="underline text-amber-700 hover:text-amber-900">Terms of Service</a>
+    </p>
+  </div>
+) : (
+  <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-800 space-y-2">
+    <p>
+      Data sourced from Massachusetts Cannabis Control Commission (MCC) public records and supplemented by manual research.
+      Information is updated periodically and may not reflect recent changes.
+    </p>
+    <p>
+      See something wrong? <a href="#correction-form" class="underline text-amber-700 hover:text-amber-900">Suggest a correction below</a>.
+    </p>
+  </div>
+)}
