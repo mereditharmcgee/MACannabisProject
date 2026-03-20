@@ -125,7 +125,7 @@ Plans:
   2. Each listing displays a "Last verified" date showing when the ownership data was last confirmed
   3. The site displays a prominent data accuracy disclaimer explaining data sources and limitations
   4. A Terms of Service / data usage notice page exists and is linked from the site footer
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 
 Plans:
 - [ ] 07-01-PLAN.md — Data pipeline lastVerified field, Terms of Service page, DataDisclaimer component, homepage footer wiring (Wave 1)
@@ -160,5 +160,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 4. Homepage and Card Layout | 2/2 | Complete    | 2026-03-18 |
 | 5. Search System | 2/2 | Complete    | 2026-03-19 |
 | 6. Filter System | 2/2 | Complete   | 2026-03-20 |
-| 7. Trust and Legal | 0/2 | Not started | - |
+| 7. Trust and Legal | 1/2 | In Progress|  |
 | 8. Data Freshness and Launch Readiness | 0/TBD | Not started | - |
