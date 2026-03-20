@@ -172,6 +172,49 @@ describe('dispensarySchema', () => {
     expect(withNull.success).toBe(true);
   });
 
+  describe('lastVerified field', () => {
+    it('accepts a valid lastVerified string like "March 2026"', () => {
+      const record = {
+        tradeName: 'Verified Dispensary',
+        licenseNumber: 'MR-100001',
+        lastVerified: 'March 2026',
+      };
+
+      const result = dispensarySchema.safeParse(record);
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data.lastVerified).toBe('March 2026');
+      }
+    });
+
+    it('accepts lastVerified as null', () => {
+      const record = {
+        tradeName: 'Null Verified Dispensary',
+        licenseNumber: 'MR-100002',
+        lastVerified: null,
+      };
+
+      const result = dispensarySchema.safeParse(record);
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data.lastVerified).toBeNull();
+      }
+    });
+
+    it('accepts record without lastVerified field (undefined)', () => {
+      const record = {
+        tradeName: 'No Verified Dispensary',
+        licenseNumber: 'MR-100003',
+      };
+
+      const result = dispensarySchema.safeParse(record);
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data.lastVerified).toBeUndefined();
+      }
+    });
+  });
+
   it('recognizes all 8 MCC Special Status tags', () => {
     expect(specialStatusTags).toHaveLength(8);
     expect(specialStatusTags).toContain('Woman-Owned');
