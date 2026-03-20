@@ -33,7 +33,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **DATA-01**: Spreadsheet (CSV) is transformed into structured JSON data at build time with schema validation
 - [x] **DATA-02**: Build fails if data has missing required fields or invalid values (no silent failures)
 - [x] **DATA-03**: Search index is pre-built at build time and served as static JSON
-- [ ] **DATA-04**: Monthly update workflow is documented: update CSV, push to git, site auto-rebuilds
+- [x] **DATA-04**: Monthly update workflow is documented: update CSV, push to git, site auto-rebuilds
 
 ### Trust & Legal
 
@@ -45,7 +45,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Design & Performance
 
 - [x] **DSGN-01**: Site is fully responsive — card grid adapts from mobile to desktop
-- [ ] **DSGN-02**: Homepage loads in under 2 seconds on a 3G mobile connection
+- [x] **DSGN-02**: Homepage loads in under 2 seconds on a 3G mobile connection
 - [ ] **DSGN-03**: Homepage features a prominent search bar with "Who Owns Your Dispensary?" headline and key stats (525 Active Licenses, 92% Independently Owned, 156 Towns)
 - [ ] **DSGN-04**: Site deploys to Cloudflare Pages from a git push with zero manual deploy steps
 
@@ -103,13 +103,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DATA-01 | Phase 2: Data Pipeline | Complete |
 | DATA-02 | Phase 2: Data Pipeline | Complete |
 | DATA-03 | Phase 5: Search System | Complete |
-| DATA-04 | Phase 8: Data Freshness and Launch Readiness | Pending |
+| DATA-04 | Phase 8: Data Freshness and Launch Readiness | Complete |
 | TRST-01 | Phase 7: Trust and Legal | Complete |
 | TRST-02 | Phase 7: Trust and Legal | Complete |
 | TRST-03 | Phase 7: Trust and Legal | Complete |
 | TRST-04 | Phase 7: Trust and Legal | Complete |
 | DSGN-01 | Phase 4: Homepage and Card Layout | Pending |
-| DSGN-02 | Phase 8: Data Freshness and Launch Readiness | Pending |
+| DSGN-02 | Phase 8: Data Freshness and Launch Readiness | Complete |
 | DSGN-03 | Phase 4 (headline + stats) + Phase 5 (search bar) | Partial — headline and stats done in Phase 4, search bar deferred to Phase 5 |
 | DSGN-04 | Phase 1: Project Scaffold and Deploy Pipeline | Pending |
 
