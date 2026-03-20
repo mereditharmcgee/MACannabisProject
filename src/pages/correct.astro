@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Formspree form ID — replace with your actual ID from https://formspree.io
+const FORMSPREE_FORM_ID = 'FORMSPREE_ID_PLACEHOLDER';
+const FORMSPREE_URL = `https://formspree.io/f/${FORMSPREE_FORM_ID}`;
+---
+
+<BaseLayout
+  title="Suggest a Correction - MA Cannabis Directory"
+  description="Submit a correction for a dispensary listing in the Massachusetts Cannabis Directory."
+>
+  <div class="max-w-xl mx-auto py-12 px-4">
+    <a href="/" class="text-sm text-green-700 hover:text-green-900 underline">&larr; Back to directory</a>
+
+    <h1 class="text-2xl font-bold text-gray-900 mt-6 mb-2">Suggest a Correction</h1>
+    <p class="text-gray-500 text-sm mb-8">See something wrong with a listing? Let us know and we'll update it.</p>
+
+    <form
+      action={FORMSPREE_URL}
+      method="POST"
+      class="space-y-5"
+    >
+      <div>
+        <label for="correction-dispensary" class="block text-sm font-medium text-gray-700 mb-1">Dispensary</label>
+        <input
+          type="text"
+          id="correction-dispensary"
+          name="dispensary"
+          required
+          readonly
+          class="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-800 focus:outline-none"
+        />
+      </div>
+      <div>
+        <label for="correction-field" class="block text-sm font-medium text-gray-700 mb-1">What needs correcting?</label>
+        <select
+          id="correction-field"
+          name="field"
+          required
+          class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none"
+        >
+          <option value="">Select a field...</option>
+          <option value="owner">Owner</option>
+          <option value="address">Address</option>
+          <option value="phone">Phone Number</option>
+          <option value="license-type">License Type</option>
+          <option value="ownership-tags">Ownership Tags</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label for="correction-value" class="block text-sm font-medium text-gray-700 mb-1">Correct information</label>
+        <textarea
+          id="correction-value"
+          name="correction"
+          required
+          rows="3"
+          placeholder="What should it say instead?"
+          class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none resize-y"
+        ></textarea>
+      </div>
+      <div>
+        <label for="correction-email" class="block text-sm font-medium text-gray-700 mb-1">Your email <span class="text-gray-400 font-normal">(optional, for follow-up)</span></label>
+        <input
+          type="email"
+          id="correction-email"
+          name="email"
+          placeholder="you@example.com"
+          class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:outline-none"
+        />
+      </div>
+      <button
+        type="submit"
+        class="w-full sm:w-auto px-6 py-2.5 bg-green-700 text-white text-sm font-medium rounded-lg hover:bg-green-800 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors"
+      >
+        Submit Correction
+      </button>
+    </form>
+  </div>
+</BaseLayout>
+
+<script>
+  // Pre-fill dispensary name from URL param
+  const params = new URLSearchParams(window.location.search);
+  const dispensary = params.get('dispensary');
+  const input = document.getElementById('correction-dispensary') as HTMLInputElement;
+  if (dispensary && input) {
+    input.value = dispensary;
+  }
+</script>
