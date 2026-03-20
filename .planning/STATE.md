@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 07-01-PLAN.md
-last_updated: "2026-03-20T14:44:33Z"
-last_activity: 2026-03-20 -- Completed 07-01 (Data pipeline and trust pages)
+stopped_at: Completed 07-02-PLAN.md
+last_updated: "2026-03-20T17:50:00Z"
+last_activity: 2026-03-20 -- Completed 07-02 (Detail page trust features)
 progress:
   total_phases: 8
-  completed_phases: 6
+  completed_phases: 7
   total_plans: 15
-  completed_plans: 14
+  completed_plans: 15
   percent: 100
 ---
 
@@ -21,23 +21,23 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-17)
 
 **Core value:** When someone Googles "who owns [dispensary name]," this site is the answer -- a transparent, searchable directory that lets Massachusetts cannabis consumers shop by their values.
-**Current focus:** Phase 7 in progress -- Trust and Legal
+**Current focus:** Phase 7 complete -- Phase 8 (Deployment) next
 
 ## Current Position
 
-Phase: 7 of 8 (Trust and Legal) -- IN PROGRESS
-Plan: 1 of 2 complete in current phase
-Status: 07-01 complete -- Data pipeline extension and trust pages
-Last activity: 2026-03-20 -- Completed 07-01 (Data pipeline and trust pages)
+Phase: 7 of 8 (Trust and Legal) -- COMPLETE
+Plan: 2 of 2 complete in current phase
+Status: 07-02 complete -- Detail page trust features
+Last activity: 2026-03-20 -- Completed 07-02 (Detail page trust features)
 
-Progress: [█████████░] 93% (phases 1-6 complete, 7 in progress, 8 remaining)
+Progress: [██████████] 100% (phases 1-7 complete, 8 remaining)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 14
+- Total plans completed: 15
 - Average duration: 3min
-- Total execution time: 0.67 hours
+- Total execution time: 0.72 hours
 
 **By Phase:**
 
@@ -48,10 +48,10 @@ Progress: [█████████░] 93% (phases 1-6 complete, 7 in progre
 | 04-homepage-and-card-layout | 2 | 5min | 2.5min |
 | 05-search-system | 2 | 6min | 3min |
 | 06-filter-system | 2 | 4min | 2min |
-| 07-trust-and-legal | 1 | 3min | 3min |
+| 07-trust-and-legal | 2 | 8min | 4min |
 
 **Recent Trend:**
-- Last 5 plans: 05-01 (4min), 05-02 (2min), 06-01 (3min), 06-02 (1min), 07-01 (3min)
+- Last 5 plans: 05-02 (2min), 06-01 (3min), 06-02 (1min), 07-01 (3min), 07-02 (5min)
 - Trend: consistent
 
 *Updated after each plan completion*
@@ -103,6 +103,9 @@ Recent decisions affecting current work:
 - [07-01]: lastVerified placed after independent field in schema, before specialStatusTags
 - [07-01]: DataDisclaimer uses amber color scheme (amber-50/200/700/800) for warm notice styling
 - [07-01]: TOS page uses plain language per user decision, no formal legal boilerplate
+- [07-02]: Replaced Google Form iframe with native HTML form via Formspree for integrated UX
+- [07-02]: Correction form on standalone /correct/ page, not embedded in detail cards
+- [07-02]: Removed No Warranty section from TOS -- user deemed it overkill
 
 ### Pending Todos
 
@@ -112,10 +115,10 @@ None yet.
 
 - [RESOLVED in 03-01]: Ownership narrative content strategy -- hybrid approach with three-state generation implemented
 - [Research]: Owner group page normalization rules needed in Phase 2 -- same person operating under multiple LLCs
-- [Research]: Correction form tooling (Formspree, Google Forms, etc.) needs evaluation before Phase 7
+- [RESOLVED in 07-02]: Correction form tooling -- chose Formspree with native HTML form over Google Forms iframe
 
 ## Session Continuity
 
-Last session: 2026-03-20T14:44:33Z
-Stopped at: Completed 07-01-PLAN.md
-Resume file: .planning/phases/07-trust-and-legal/07-01-SUMMARY.md
+Last session: 2026-03-20T17:50:00Z
+Stopped at: Completed 07-02-PLAN.md
+Resume file: .planning/phases/07-trust-and-legal/07-02-SUMMARY.md

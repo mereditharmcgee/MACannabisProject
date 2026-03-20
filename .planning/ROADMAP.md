@@ -18,7 +18,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 4: Homepage and Card Layout** - Responsive homepage with hero section, stats banner, and browsable card grid (completed 2026-03-18)
 - [x] **Phase 5: Search System** - Instant typeahead search across dispensary names, towns, and owners with pre-built Fuse.js index (completed 2026-03-19)
 - [x] **Phase 6: Filter System** - Ownership tag filter pills, county dropdown, composing with search (MSO/Independent toggle deferred) (completed 2026-03-20)
-- [ ] **Phase 7: Trust and Legal** - Correction form, data disclaimer, last-verified dates, and Terms of Service
+- [x] **Phase 7: Trust and Legal** - Correction form, data disclaimer, last-verified dates, and Terms of Service (completed 2026-03-20)
 - [ ] **Phase 8: Data Freshness and Launch Readiness** - Monthly update workflow, performance optimization, and launch checklist completion
 
 ## Phase Details
@@ -125,7 +125,7 @@ Plans:
   2. Each listing displays a "Last verified" date showing when the ownership data was last confirmed
   3. The site displays a prominent data accuracy disclaimer explaining data sources and limitations
   4. A Terms of Service / data usage notice page exists and is linked from the site footer
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [ ] 07-01-PLAN.md — Data pipeline lastVerified field, Terms of Service page, DataDisclaimer component, homepage footer wiring (Wave 1)
@@ -160,5 +160,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 4. Homepage and Card Layout | 2/2 | Complete    | 2026-03-18 |
 | 5. Search System | 2/2 | Complete    | 2026-03-19 |
 | 6. Filter System | 2/2 | Complete   | 2026-03-20 |
-| 7. Trust and Legal | 1/2 | In Progress|  |
+| 7. Trust and Legal | 2/2 | Complete   | 2026-03-20 |
 | 8. Data Freshness and Launch Readiness | 0/TBD | Not started | - |

@@ -37,7 +37,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Trust & Legal
 
-- [ ] **TRST-01**: Each listing has a "Suggest a Correction" form that submits without requiring user login
+- [x] **TRST-01**: Each listing has a "Suggest a Correction" form that submits without requiring user login
 - [x] **TRST-02**: Site displays a publisher disclaimer about data accuracy and sources
 - [x] **TRST-03**: Each listing shows a "last verified" date
 - [x] **TRST-04**: Site includes Terms of Service / data usage notice
@@ -104,7 +104,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DATA-02 | Phase 2: Data Pipeline | Complete |
 | DATA-03 | Phase 5: Search System | Complete |
 | DATA-04 | Phase 8: Data Freshness and Launch Readiness | Pending |
-| TRST-01 | Phase 7: Trust and Legal | Pending |
+| TRST-01 | Phase 7: Trust and Legal | Complete |
 | TRST-02 | Phase 7: Trust and Legal | Complete |
 | TRST-03 | Phase 7: Trust and Legal | Complete |
 | TRST-04 | Phase 7: Trust and Legal | Complete |
