@@ -24,6 +24,7 @@ const headerMap: Record<string, string> = {
   'License Type': 'licenseType',
   'Ownership Details': 'ownershipDetails',
   'Special Status': 'specialStatus',
+  'Last Verified': 'lastVerified',
   // Unmapped columns present in XLSX but not in schema:
   // 'Ownership Source', 'Latitude', 'Longitude'
 };
@@ -151,6 +152,7 @@ export function parseDispensarySheet(workbook: ExcelJS.Workbook): ParseResult {
       licenseType: rawData.licenseType ?? null,
       ownershipDetails: rawData.ownershipDetails ?? null,
       independent: rawData.independent as 'Yes' | 'No' | null ?? null,
+      lastVerified: rawData.lastVerified ?? null,
       specialStatusTags: parsedTags,
       needsNarrative,
       researchInconclusive,

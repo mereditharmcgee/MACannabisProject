@@ -20,6 +20,7 @@ const dispensaries = defineCollection({
     licenseType: z.string().nullable().optional(),
     ownershipDetails: z.string().nullable().optional(),
     independent: z.enum(['Yes', 'No']).nullable().optional(),
+    lastVerified: z.string().nullable().optional(),
     specialStatusTags: z.array(z.string()).default([]),
     needsNarrative: z.boolean().default(false),
     researchInconclusive: z.boolean().default(false),

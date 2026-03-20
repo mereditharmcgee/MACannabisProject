@@ -41,6 +41,7 @@ export const dispensarySchema = z.object({
   licenseType: z.string().nullable().optional(),
   ownershipDetails: z.string().nullable().optional(),
   independent: z.enum(['Yes', 'No']).nullable().optional(),
+  lastVerified: z.string().nullable().optional(),
 
   // Derived fields
   specialStatusTags: z.array(z.enum(specialStatusTags)).default([]),
