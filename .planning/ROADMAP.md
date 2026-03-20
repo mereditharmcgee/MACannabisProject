@@ -140,11 +140,11 @@ Plans:
   2. The homepage loads in under 2 seconds on a simulated 3G mobile connection
   3. All 525 detail page URLs return 200 status codes on the production deployment
   4. The sitemap.xml includes all dispensary and owner pages and is accessible to search engines
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 08-01: TBD
-- [ ] 08-02: TBD
+- [ ] 08-01-PLAN.md — Sitemap integration, README with data update workflow and launch checklist (Wave 1)
+- [ ] 08-02-PLAN.md — Build validation, performance verification, and launch readiness checkpoint (Wave 2)
 
 ## Progress
 
@@ -161,4 +161,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 5. Search System | 2/2 | Complete    | 2026-03-19 |
 | 6. Filter System | 2/2 | Complete   | 2026-03-20 |
 | 7. Trust and Legal | 2/2 | Complete   | 2026-03-20 |
-| 8. Data Freshness and Launch Readiness | 0/TBD | Not started | - |
+| 8. Data Freshness and Launch Readiness | 0/2 | Not started | - |
