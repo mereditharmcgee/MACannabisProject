@@ -1,6 +1,7 @@
 ---
 import OwnershipBadge from './OwnershipBadge.astro';
 import SiblingLinks from './SiblingLinks.astro';
+import DataDisclaimer from './DataDisclaimer.astro';
 
 interface Dispensary {
   tradeName: string;
@@ -10,6 +11,7 @@ interface Dispensary {
   town: string | null;
   phone: string | null;
   licenseType: string | null;
+  lastVerified?: string | null;
   specialStatusTags: string[];
   researchInconclusive: boolean;
   [key: string]: unknown;
@@ -52,6 +54,12 @@ const showParentCompany =
   dispensary.parentCompany &&
   ownerDisplay &&
   dispensary.parentCompany.toLowerCase() !== ownerDisplay.toLowerCase();
+
+// Correction form URL with pre-filled dispensary name
+// Replace FORM_ID_PLACEHOLDER and FIELD_ID_PLACEHOLDER with actual Google Form IDs after form creation.
+const CORRECTION_FORM_BASE = 'https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/viewform';
+const DISPENSARY_NAME_ENTRY = 'entry.FIELD_ID_PLACEHOLDER';
+const correctionFormUrl = `${CORRECTION_FORM_BASE}?${DISPENSARY_NAME_ENTRY}=${encodeURIComponent(dispensary.tradeName)}&embedded=true`;
 ---
 
 <a href="/" class="inline-block mb-4 text-green-700 hover:underline text-sm">&larr; Back to Directory</a>
@@ -141,5 +149,41 @@ const showParentCompany =
     {!dispensary.researchInconclusive && (
       <SiblingLinks siblings={siblings} />
     )}
+
+    {/* Last Verified (conditional) */}
+    {dispensary.lastVerified && (
+      <div class="border-t border-gray-100 pt-4 mt-4">
+        <p class="text-xs text-gray-400">
+          <span class="font-semibold uppercase tracking-wide">Last Verified:</span> {dispensary.lastVerified}
+        </p>
+      </div>
+    )}
+
+    {/* Data Disclaimer */}
+    <div class="mt-5">
+      <DataDisclaimer variant="detailed" />
+    </div>
+
+    {/* Correction Form */}
+    <section id="correction-form" class="mt-6 border-t border-gray-100 pt-6">
+      <h2 class="text-lg font-semibold text-gray-900 mb-3">Suggest a Correction</h2>
+      <p class="text-sm text-gray-500 mb-3">See something wrong with this listing? Let us know and we'll update it.</p>
+      <iframe
+        src={correctionFormUrl}
+        width="100%"
+        height="660"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        title={`Suggest a correction for ${dispensary.tradeName}`}
+        loading="lazy"
+        class="rounded-lg border border-gray-200"
+      >Loading correction form...</iframe>
+    </section>
+
+    {/* Terms of Service Link */}
+    <div class="mt-4 text-center">
+      <a href="/terms/" class="text-xs text-gray-400 hover:text-gray-600 underline">Terms of Service</a>
+    </div>
   </div>
 </article>
