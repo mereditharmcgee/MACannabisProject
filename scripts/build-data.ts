@@ -14,8 +14,14 @@ async function main() {
     'MA_Dispensary_Ownership_Directory.xlsx',
   );
 
-  // Check file exists
+  // Check file exists — if missing but JSON data already exists, skip gracefully (CI/CD scenario)
   if (!fs.existsSync(xlsxPath)) {
+    const dataDir = path.resolve(process.cwd(), 'src/data');
+    const jsonExists = fs.existsSync(path.join(dataDir, 'dispensaries.json'));
+    if (jsonExists) {
+      console.log('XLSX not found but src/data/dispensaries.json exists — skipping data build.');
+      return;
+    }
     console.error(
       `XLSX file not found: ${xlsxPath}\nPlace MA_Dispensary_Ownership_Directory.xlsx in the project root.`,
     );
