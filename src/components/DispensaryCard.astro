@@ -5,12 +5,14 @@ import DataDisclaimer from './DataDisclaimer.astro';
 
 interface Dispensary {
   tradeName: string;
+  licenseNumber: string;
   owner: string | null;
   parentCompany: string | null;
   address: string | null;
   town: string | null;
   phone: string | null;
   licenseType: string | null;
+  ownershipDetails: string | null;
   lastVerified?: string | null;
   specialStatusTags: string[];
   researchInconclusive: boolean;
@@ -26,6 +28,7 @@ interface SiblingEntry {
   tradeName: string;
   slug: string;
   town: string | null;
+  licenseNumber?: string;
   [key: string]: unknown;
 }
 
@@ -41,12 +44,12 @@ const { dispensary, narrative, siblings } = Astro.props;
 const mapsQuery = [dispensary.address, dispensary.town, 'MA'].filter(Boolean).join(', ');
 const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
 
-// Format phone for tel: href (strip to digits and leading +)
+// Format phone for tel: href
 const phoneHref = dispensary.phone
   ? `tel:${dispensary.phone.replace(/[^\d+]/g, '')}`
   : null;
 
-// Determine owner display: show parentCompany if different from owner
+// Owner display: strip parenthetical roles
 const ownerDisplay = dispensary.owner
   ? dispensary.owner.replace(/\s*\(.*?\)\s*/g, '').trim()
   : null;
@@ -55,7 +58,13 @@ const showParentCompany =
   ownerDisplay &&
   dispensary.parentCompany.toLowerCase() !== ownerDisplay.toLowerCase();
 
-// Correction form link — pre-fills dispensary name via URL param
+// Legal name: parentCompany if different from tradeName
+const legalName = dispensary.parentCompany &&
+  dispensary.parentCompany.toLowerCase() !== dispensary.tradeName.toLowerCase()
+  ? dispensary.parentCompany
+  : null;
+
+// Correction form link
 const correctionUrl = `/correct/?dispensary=${encodeURIComponent(dispensary.tradeName)}`;
 ---
 
@@ -63,42 +72,76 @@ const correctionUrl = `/correct/?dispensary=${encodeURIComponent(dispensary.trad
 
 <article class="bg-white rounded-xl shadow-md max-w-2xl mx-auto overflow-hidden">
   <div class="p-6 sm:p-8">
-    {/* Header: Name and Badges */}
-    <header class="mb-6">
-      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">{dispensary.tradeName}</h1>
-      {dispensary.specialStatusTags.length > 0 && (
-        <div class="flex flex-wrap gap-2">
-          {dispensary.specialStatusTags.map((tag) => (
-            <OwnershipBadge tag={tag} />
-          ))}
-        </div>
-      )}
+
+    {/* === HEADER: Trade Name + Legal Name + License Number === */}
+    <header class="mb-4">
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">{dispensary.tradeName}</h1>
+      <div class="mt-1 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        {legalName && (
+          <p class="text-sm text-gray-500">{legalName}</p>
+        )}
+        <p class="text-sm text-gray-400 font-mono">{dispensary.licenseNumber}</p>
+      </div>
     </header>
 
-    {/* Owner Section (hidden for researchInconclusive) */}
-    {!dispensary.researchInconclusive && ownerDisplay && (
-      <section class="mb-5">
-        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">Owner</h2>
-        <p class="text-lg text-gray-800 font-medium">{ownerDisplay}</p>
-        {showParentCompany && (
-          <p class="text-sm text-gray-600 mt-0.5">{dispensary.parentCompany}</p>
-        )}
-      </section>
+    {/* === SPECIAL STATUS TAGS === */}
+    {dispensary.specialStatusTags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-5">
+        {dispensary.specialStatusTags.map((tag) => (
+          <OwnershipBadge tag={tag} />
+        ))}
+      </div>
     )}
 
-    {/* Narrative Section (hidden for researchInconclusive) */}
+    {/* === DISPENSARY INFO: Address, Phone, License Type === */}
+    <section class="mb-6 space-y-2">
+      {dispensary.address && (
+        <div class="flex items-start gap-2">
+          <svg class="w-4 h-4 text-gray-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+          <a
+            href={mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-green-700 hover:underline"
+          >
+            {dispensary.address}{dispensary.town ? `, ${dispensary.town}, MA` : ', MA'}
+          </a>
+        </div>
+      )}
+      {dispensary.phone && phoneHref && (
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+          </svg>
+          <a href={phoneHref} class="text-sm text-green-700 hover:underline">{dispensary.phone}</a>
+        </div>
+      )}
+      {dispensary.licenseType && (
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <p class="text-sm text-gray-600">{dispensary.licenseType}</p>
+        </div>
+      )}
+    </section>
+
+    {/* === DISPENSARY BIO (Narrative) === */}
     {!dispensary.researchInconclusive && narrative.type === 'full' && (
-      <section class="mb-6">
+      <section class="mb-6 border-t border-gray-100 pt-5">
+        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">About This Dispensary</h2>
         <p class="text-gray-700 leading-relaxed">{narrative.text}</p>
       </section>
     )}
     {!dispensary.researchInconclusive && narrative.type === 'pending' && (
-      <section class="mb-6">
+      <section class="mb-6 border-t border-gray-100 pt-5">
+        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">About This Dispensary</h2>
         <p class="text-gray-500 italic leading-relaxed">{narrative.text}</p>
       </section>
     )}
-
-    {/* Researching Notice (for researchInconclusive) */}
     {dispensary.researchInconclusive && (
       <div class="mb-6 bg-gray-50 border border-gray-200 rounded-lg p-4">
         <p class="text-gray-600 text-sm">
@@ -107,47 +150,26 @@ const correctionUrl = `/correct/?dispensary=${encodeURIComponent(dispensary.trad
       </div>
     )}
 
-    {/* Facts Section */}
-    <section class="border-t border-gray-100 pt-5">
-      <dl class="grid grid-cols-1 gap-4">
-        {dispensary.address && (
-          <div>
-            <dt class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Address</dt>
-            <dd class="mt-0.5">
-              <a
-                href={mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-green-700 hover:underline"
-              >
-                {dispensary.address}{dispensary.town ? `, ${dispensary.town}, MA` : ', MA'}
-              </a>
-            </dd>
-          </div>
+    {/* === OWNER / PARENT SECTION === */}
+    {!dispensary.researchInconclusive && ownerDisplay && (
+      <section class="mb-6 border-t border-gray-100 pt-5">
+        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Owner / Parent Company</h2>
+        <p class="text-lg text-gray-800 font-medium">{ownerDisplay}</p>
+        {showParentCompany && (
+          <p class="text-sm text-gray-600 mt-0.5">{dispensary.parentCompany}</p>
         )}
-        {dispensary.phone && phoneHref && (
-          <div>
-            <dt class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Phone</dt>
-            <dd class="mt-0.5">
-              <a href={phoneHref} class="text-green-700 hover:underline">{dispensary.phone}</a>
-            </dd>
-          </div>
+        {dispensary.ownershipDetails && (
+          <p class="text-sm text-gray-600 leading-relaxed mt-2">{dispensary.ownershipDetails}</p>
         )}
-        {dispensary.licenseType && (
-          <div>
-            <dt class="text-sm font-semibold text-gray-500 uppercase tracking-wide">License Type</dt>
-            <dd class="mt-0.5 text-gray-800">{dispensary.licenseType}</dd>
-          </div>
-        )}
-      </dl>
-    </section>
+      </section>
+    )}
 
-    {/* Sibling Links (hidden for researchInconclusive) */}
+    {/* === OTHER DISPENSARIES & LICENSES OWNED === */}
     {!dispensary.researchInconclusive && (
       <SiblingLinks siblings={siblings} />
     )}
 
-    {/* Last Verified (conditional) */}
+    {/* === LAST VERIFIED === */}
     {dispensary.lastVerified && (
       <div class="border-t border-gray-100 pt-4 mt-4">
         <p class="text-xs text-gray-400">
@@ -156,13 +178,13 @@ const correctionUrl = `/correct/?dispensary=${encodeURIComponent(dispensary.trad
       </div>
     )}
 
-    {/* Data Disclaimer */}
+    {/* === DATA DISCLAIMER === */}
     <div class="mt-5">
       <DataDisclaimer variant="detailed" />
     </div>
 
-    {/* Suggest a Correction Link */}
-    <div class="mt-5 border-t border-gray-100 pt-4">
+    {/* === SUGGEST A CORRECTION + TOS === */}
+    <div class="mt-5 border-t border-gray-100 pt-4 flex items-center justify-between">
       <a
         href={correctionUrl}
         class="inline-flex items-center text-sm text-green-700 hover:text-green-900 hover:underline"
@@ -172,10 +194,6 @@ const correctionUrl = `/correct/?dispensary=${encodeURIComponent(dispensary.trad
         </svg>
         Suggest a Correction
       </a>
-    </div>
-
-    {/* Terms of Service Link */}
-    <div class="mt-4 text-center">
       <a href="/terms/" class="text-xs text-gray-400 hover:text-gray-600 underline">Terms of Service</a>
     </div>
   </div>
